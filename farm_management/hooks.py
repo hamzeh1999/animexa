@@ -1,8 +1,8 @@
 app_name = "farm_management"
-app_title = "farm_management"
-app_publisher = "MIT"
-app_description = "An integrated digital system designed for the intelligent management of poultry and livestock farms."
-app_email = "develop@EnAi.com"
+app_title = "Farm Management"
+app_publisher = "ENAI JORDAN"
+app_description = "Poultry Parent Stock Management App"
+app_email = "dev@enai.local"
 app_license = "mit"
 
 # Apps
@@ -15,7 +15,7 @@ app_license = "mit"
 # 	{
 # 		"name": "farm_management",
 # 		"logo": "/assets/farm_management/logo.png",
-# 		"title": "farm_management",
+# 		"title": "Farm Management",
 # 		"route": "/farm_management",
 # 		"has_permission": "farm_management.api.permission.has_app_permission"
 # 	}
