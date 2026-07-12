@@ -4,7 +4,7 @@ app_publisher = "MIT"
 app_description = "An integrated digital system designed for the intelligent management of poultry and livestock farms."
 app_email = "develop@EnAi.com"
 app_license = "mit"
-required_frappe_version = ">=15.0.0"
+required_frappe_version = ">=16.0.0 <17.0.0"
 # Apps
 # ------------------
 
