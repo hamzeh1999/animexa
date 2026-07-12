@@ -4,7 +4,7 @@ app_publisher = "ENAI JORDAN"
 app_description = "Poultry Parent Stock Management App"
 app_email = "dev@enai.local"
 app_license = "mit"
-required_frappe_version = ">=16.0.0 <17.0.0"
+required_frappe_version = ">=16.0.0"
 # Apps
 # ------------------
 
