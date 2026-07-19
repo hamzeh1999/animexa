@@ -307,6 +307,33 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Farm Manager",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Farm Supervisor",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Biosecurity Manager",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Production Manager"
+  },
+  {
+   "read": 1,
+   "role": "Veterinary Manager"
+  },
+  {
+   "read": 1,
+   "role": "QA Manager"
   }
  ],
  "row_format": "Dynamic",

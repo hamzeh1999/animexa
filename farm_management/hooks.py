@@ -5,6 +5,39 @@ app_description = "An integrated digital system designed for the intelligent man
 app_email = "develop@EnAi.com"
 app_license = "mit"
 
+# Fixtures
+# ------------------
+# Custom operational Roles for the Farm Management system, exported so they
+# are created automatically when this app is installed on another site.
+
+fixtures = [
+	{
+		"doctype": "Role",
+		"filters": [
+			[
+				"name",
+				"in",
+				[
+					"Veterinary Manager",
+					"Veterinarian",
+					"Farm Veterinarian",
+					"Biosecurity Manager",
+					"QA Manager",
+					"QA Team",
+					"QA & Welfare Manager",
+					"Laboratory Team",
+					"Production Manager",
+					"Technical Supervisor",
+					"Production Team",
+					"Farm Manager",
+					"Farm Supervisor",
+					"Farm Worker",
+				],
+			]
+		],
+	}
+]
+
 # Apps
 # ------------------
 

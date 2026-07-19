@@ -45,6 +45,20 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Veterinary Manager",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Production Manager",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Farm Manager"
   }
  ],
  "row_format": "Dynamic",

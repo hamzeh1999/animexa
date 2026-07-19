@@ -105,6 +105,31 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Biosecurity Manager",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "QA Manager",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "QA Team",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Farm Supervisor",
+   "write": 1
+  },
+  {
+   "create": 1,
+   "read": 1,
+   "role": "Farm Worker"
   }
  ],
  "row_format": "Dynamic",

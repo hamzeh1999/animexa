@@ -137,6 +137,30 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Farm Manager",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Farm Supervisor",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Production Manager",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Technical Supervisor",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Production Team"
   }
  ],
  "row_format": "Dynamic",
