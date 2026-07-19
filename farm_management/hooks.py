@@ -256,3 +256,25 @@ app_license = "mit"
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
 
+
+# Fixtures
+fixtures = [
+    {
+        "dt": "Role",
+        "filters": [
+            ["name", "=", "Animexa User"]
+        ]
+    },
+    {
+        "dt": "Workspace",
+        "filters": [
+            ["name", "=", "Animexa"]
+        ]
+    },
+    {
+        "dt": "Workspace Sidebar",
+        "filters": [
+            ["name", "=", "Animexa"]
+        ]
+    }
+]
