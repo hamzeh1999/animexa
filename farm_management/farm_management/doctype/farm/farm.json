@@ -1,0 +1,318 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:farm_name",
+ "creation": "2026-07-14 11:05:38.972520",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "main_section",
+  "farm_name",
+  "ownership_type",
+  "farm_purpose",
+  "latitude",
+  "longitude",
+  "column_break_fasd",
+  "status",
+  "location",
+  "is_virtual",
+  "infrastructure_section",
+  "water_source",
+  "total_houses",
+  "total_capacity",
+  "has_backup_generator",
+  "column_break_sqjq",
+  "road_access_type",
+  "feed_storage_capacity_kg",
+  "has_alarm_system",
+  "section_break_euwq",
+  "isolation_distance_km",
+  "last_water_quality_test",
+  "dead_bird_disposal_method",
+  "cleaning_start_date",
+  "cleaning_end_date",
+  "downtime_days",
+  "column_break_hqel",
+  "ready_date",
+  "tvc_result",
+  "salmonella_result",
+  "rodent_control_active",
+  "disinfection_method",
+  "biosecurity_level",
+  "health_biosecurity_section",
+  "visitor_log",
+  "incident_log",
+  "vaccination_record",
+  "water_quality_tests"
+ ],
+ "fields": [
+  {
+   "fieldname": "farm_name",
+   "fieldtype": "Data",
+   "label": "Farm Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "ownership_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Ownership Type",
+   "options": "Own\nContracted\nManaged"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "\nReady\nOccupied\nCleaning\nEmpty\nInactive",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "description": "For feasibility studies only.",
+   "fieldname": "is_virtual",
+   "fieldtype": "Check",
+   "label": "Is Virtual"
+  },
+  {
+   "fieldname": "farm_purpose",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Farm Purpose",
+   "options": "Rearing\nLaying\nDay-Old-to-Depletion"
+  },
+  {
+   "fieldname": "location",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Location"
+  },
+  {
+   "default": "0",
+   "fieldname": "total_houses",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Total Houses",
+   "no_copy": 1,
+   "non_negative": 1,
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "total_capacity",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Total Capacity",
+   "no_copy": 1,
+   "non_negative": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "cleaning_start_date",
+   "fieldtype": "Date",
+   "label": "Cleaning Start Date"
+  },
+  {
+   "fieldname": "cleaning_end_date",
+   "fieldtype": "Date",
+   "label": "Cleaning End Date"
+  },
+  {
+   "description": "Date when the farm became ready for new placement",
+   "fieldname": "ready_date",
+   "fieldtype": "Date",
+   "label": "Ready Date"
+  },
+  {
+   "fieldname": "latitude",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Latitude"
+  },
+  {
+   "fieldname": "longitude",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Longitude"
+  },
+  {
+   "fieldname": "infrastructure_section",
+   "fieldtype": "Section Break",
+   "label": "Infrastructure"
+  },
+  {
+   "default": "0",
+   "description": "Indicates whether environmental alarm systems are installed.",
+   "fieldname": "has_alarm_system",
+   "fieldtype": "Check",
+   "label": "Alarm System"
+  },
+  {
+   "fieldname": "main_section",
+   "fieldtype": "Section Break",
+   "label": "Core Identity & Classification"
+  },
+  {
+   "fieldname": "road_access_type",
+   "fieldtype": "Select",
+   "label": "Road Access Type",
+   "options": "Paved\nGravel\nDirt"
+  },
+  {
+   "default": "0",
+   "description": "Maximum feed storage capacity for maintaining a 3\u20137 day feed reserve.",
+   "fieldname": "feed_storage_capacity_kg",
+   "fieldtype": "Float",
+   "label": "Feed Storage Capacity (kg)",
+   "non_negative": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "has_backup_generator",
+   "fieldtype": "Check",
+   "label": "Backup Generator"
+  },
+  {
+   "fieldname": "section_break_euwq",
+   "fieldtype": "Section Break",
+   "label": "Biosecurity & Hygiene"
+  },
+  {
+   "default": "21",
+   "description": "Number of days between Cleaning Start and Ready Date.",
+   "fieldname": "downtime_days",
+   "fieldtype": "Int",
+   "label": "Downtime Days",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "column_break_fasd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Total Viable Count (TVC) from the most recent microbiological test.",
+   "fieldname": "tvc_result",
+   "fieldtype": "Float",
+   "label": "TVC Result",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "salmonella_result",
+   "fieldtype": "Select",
+   "label": "Salmonella Result",
+   "options": "\nNegative\nPositive\nPending",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "rodent_control_active",
+   "fieldtype": "Check",
+   "label": "Rodent Control Active"
+  },
+  {
+   "fieldname": "disinfection_method",
+   "fieldtype": "Select",
+   "label": "Disinfection Method",
+   "options": "Fogging\nSpraying\nThermal Fogging\nOther"
+  },
+  {
+   "fieldname": "biosecurity_level",
+   "fieldtype": "Select",
+   "label": "Biosecurity Level",
+   "options": "Standard\nEnhanced\nMaximum"
+  },
+  {
+   "fieldname": "column_break_sqjq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_hqel",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "health_biosecurity_section",
+   "fieldtype": "Section Break",
+   "label": "Health & Biosecurity Records"
+  },
+  {
+   "fieldname": "visitor_log",
+   "fieldtype": "Table",
+   "label": "Visitor Log",
+   "options": "Farm Visitor Log"
+  },
+  {
+   "fieldname": "incident_log",
+   "fieldtype": "Table",
+   "label": "Incident Log",
+   "options": "Farm Incident Log"
+  },
+  {
+   "fieldname": "vaccination_record",
+   "fieldtype": "Table",
+   "label": "Vaccination Record",
+   "options": "Farm Vaccination Record"
+  },
+  {
+   "fieldname": "water_quality_tests",
+   "fieldtype": "Table",
+   "label": "Water Quality Tests",
+   "options": "Farm Water Quality Test"
+  },
+  {
+   "description": "Distance to the nearest poultry or livestock facility (recommended \u2265 3.2 km).",
+   "fieldname": "isolation_distance_km",
+   "fieldtype": "Float",
+   "label": "Isolation Distance (km)",
+   "non_negative": 1,
+   "precision": "2"
+  },
+  {
+   "fieldname": "water_source",
+   "fieldtype": "Select",
+   "label": "Water Source",
+   "options": "Well\nMunicipal\nSurface Water\nMixed\nOther",
+   "reqd": 1
+  },
+  {
+   "fieldname": "dead_bird_disposal_method",
+   "fieldtype": "Select",
+   "label": "Dead Bird Disposal Method",
+   "options": "Incineration\nComposting\nRendering\nApproved External Contractor\nOther"
+  },
+  {
+   "fieldname": "last_water_quality_test",
+   "fieldtype": "Date",
+   "label": "Last Water Quality Test"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-07-19 11:36:25.237670",
+ "modified_by": "Administrator",
+ "module": "Farm Management",
+ "name": "Farm",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "farm_name"
+}
