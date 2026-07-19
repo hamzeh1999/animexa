@@ -4,13 +4,13 @@
  "docstatus": 0,
  "doctype": "Desktop Icon",
  "hidden": 0,
- "icon": "organization",
- "icon_type": "App",
+ "icon": "animexa",
+ "icon_type": "Link",
  "idx": 20,
  "label": "Animexa",
- "link": "/desk/animexa",
- "link_type": "External",
- "modified": "2026-07-09 04:19:16.941283",
+ "link_to": "Animexa",
+ "link_type": "Workspace Sidebar",
+ "modified": "2026-07-17 14:32:10.422879",
  "modified_by": "Administrator",
  "name": "Animexa",
  "owner": "Administrator",
@@ -18,6 +18,9 @@
  "roles": [
   {
    "role": "System Manager"
+  },
+  {
+   "role": "Animexa User"
   }
  ],
  "standard": 1
