@@ -1,6 +1,6 @@
-### Farm Management
+### farm_management
 
-Poultry Parent Stock Management App
+An integrated digital system designed for the intelligent management of poultry and livestock farms.
 
 ### Installation
 
@@ -8,7 +8,7 @@ You can install this app using the [bench](https://github.com/frappe/bench) CLI:
 
 ```bash
 cd $PATH_TO_YOUR_BENCH
-bench get-app $URL_OF_THIS_REPO --branch dev
+bench get-app $URL_OF_THIS_REPO --branch version-16
 bench install-app farm_management
 ```
 
