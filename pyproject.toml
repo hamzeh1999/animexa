@@ -1,9 +1,9 @@
 [project]
 name = "farm_management"
 authors = [
-    { name = "ENAI JORDAN", email = "dev@enai.local"}
+    { name = "MIT", email = "develop@EnAi.com"}
 ]
-description = "Poultry Parent Stock Management App"
+description = "An integrated digital system designed for the intelligent management of poultry and livestock farms."
 requires-python = ">=3.14"
 readme = "README.md"
 dynamic = ["version"]

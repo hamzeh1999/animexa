@@ -1,1 +1,10 @@
-Farm Management
+Master Data
+Flock Management
+Breeding Management
+Production Management
+Feed Management
+Environment Management
+Hatchery Management
+Growout Management
+Reports & Analytics
+Settings
