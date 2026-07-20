@@ -179,6 +179,10 @@
   "name": "Farm Worker",
   "restrict_to_domain": null,
   "role_name": "Farm Worker",
+  "modified": "2026-07-12 15:51:23.032513",
+  "name": "Animexa User",
+  "restrict_to_domain": null,
+  "role_name": "Animexa User",
   "two_factor_auth": 0
  }
 ]

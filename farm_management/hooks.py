@@ -149,6 +149,12 @@ fixtures = [
 
 # after_build = "farm_management.build.after_build"
 
+# Migration
+# ------------------
+# Keep Module Def records in sync with modules.txt on every migrate
+
+after_migrate = ["farm_management.migrate.after_migrate"]
+
 # Desk Notifications
 # ------------------
 # See frappe.core.notifications.get_notification_config
@@ -289,3 +295,25 @@ fixtures = [
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
 
+
+# Fixtures
+fixtures = [
+    {
+        "dt": "Role",
+        "filters": [
+            ["name", "=", "Animexa User"]
+        ]
+    },
+    {
+        "dt": "Workspace",
+        "filters": [
+            ["name", "=", "Animexa"]
+        ]
+    },
+    {
+        "dt": "Workspace Sidebar",
+        "filters": [
+            ["name", "=", "Animexa"]
+        ]
+    }
+]
