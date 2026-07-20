@@ -116,6 +116,12 @@ app_license = "mit"
 
 # after_build = "farm_management.build.after_build"
 
+# Migration
+# ------------------
+# Keep Module Def records in sync with modules.txt on every migrate
+
+after_migrate = ["farm_management.migrate.after_migrate"]
+
 # Desk Notifications
 # ------------------
 # See frappe.core.notifications.get_notification_config
