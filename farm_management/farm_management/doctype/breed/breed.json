@@ -1,0 +1,70 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:breed_name",
+ "creation": "2026-07-09 10:01:28.286820",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "breed_name",
+  "species"
+ ],
+ "fields": [
+  {
+   "fieldname": "breed_name",
+   "fieldtype": "Data",
+   "label": "Breed Name",
+   "unique": 1
+  },
+  {
+   "fieldname": "species",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Species",
+   "options": "Chicken"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-07-14 10:12:56.246502",
+ "modified_by": "Administrator",
+ "module": "Farm Management",
+ "name": "Breed",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Veterinary Manager",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Production Manager",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Farm Manager"
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "breed_name"
+}

@@ -1,0 +1,140 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-07-15 13:08:06.910708",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "visitor_name",
+  "company",
+  "purpose",
+  "entry_time",
+  "exit_time",
+  "column_break_frrk",
+  "previous_farm_visited",
+  "next_farm_to_visit",
+  "last_contact_with_poultry",
+  "vehicle_disinfected",
+  "protective_equipment_worn"
+ ],
+ "fields": [
+  {
+   "fieldname": "visitor_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Visitor Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Data",
+   "label": "Company"
+  },
+  {
+   "fieldname": "purpose",
+   "fieldtype": "Select",
+   "label": "Purpose",
+   "options": "\nRoutine Inspection\nVeterinary\nFeed Delivery\nMaintenance\nManagement\nOther",
+   "reqd": 1
+  },
+  {
+   "fieldname": "previous_farm_visited",
+   "fieldtype": "Link",
+   "label": "Previous Farm Visited",
+   "options": "Farm"
+  },
+  {
+   "fieldname": "next_farm_to_visit",
+   "fieldtype": "Link",
+   "label": "Next Farm to Visit",
+   "options": "Farm"
+  },
+  {
+   "fieldname": "entry_time",
+   "fieldtype": "Datetime",
+   "label": "Entry Time",
+   "reqd": 1
+  },
+  {
+   "fieldname": "exit_time",
+   "fieldtype": "Datetime",
+   "label": "Exit Time"
+  },
+  {
+   "default": "0",
+   "description": "Confirms vehicle was disinfected at farm entrance.",
+   "fieldname": "vehicle_disinfected",
+   "fieldtype": "Check",
+   "label": "Vehicle Disinfected"
+  },
+  {
+   "default": "0",
+   "description": "Confirms visitor wore farm-specific PPE (boots, coveralls).",
+   "fieldname": "protective_equipment_worn",
+   "fieldtype": "Check",
+   "label": "Protective Equipment Worn"
+  },
+  {
+   "fieldname": "column_break_frrk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "last_contact_with_poultry",
+   "fieldtype": "Date",
+   "label": "Last Contact with Poultry"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-07-18 09:53:46.877920",
+ "modified_by": "Administrator",
+ "module": "Health & Biosecurity",
+ "name": "Farm Visitor Log",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Biosecurity Manager",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "QA Manager",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "QA Team",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Farm Supervisor",
+   "write": 1
+  },
+  {
+   "create": 1,
+   "read": 1,
+   "role": "Farm Worker"
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
