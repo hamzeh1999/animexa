@@ -2,7 +2,7 @@ app_name = "farm_management"
 app_title = "farm_management"
 app_publisher = "MIT"
 app_description = "An integrated digital system designed for the intelligent management of poultry and livestock farms."
-app_email = "develop@EnAi.com"
+app_email = "fshureih@enaijo.com"
 app_license = "mit"
 
 # Fixtures
@@ -11,31 +11,44 @@ app_license = "mit"
 # are created automatically when this app is installed on another site.
 
 fixtures = [
-	{
-		"doctype": "Role",
-		"filters": [
-			[
-				"name",
-				"in",
-				[
-					"Veterinary Manager",
-					"Veterinarian",
-					"Farm Veterinarian",
-					"Biosecurity Manager",
-					"QA Manager",
-					"QA Team",
-					"QA & Welfare Manager",
-					"Laboratory Team",
-					"Production Manager",
-					"Technical Supervisor",
-					"Production Team",
-					"Farm Manager",
-					"Farm Supervisor",
-					"Farm Worker",
-				],
-			]
-		],
-	}
+    {
+        "dt": "Role",
+        "filters": [
+            [
+                "name",
+                "in",
+                [
+                    "Veterinary Manager",
+                    "Veterinarian",
+                    "Farm Veterinarian",
+                    "Biosecurity Manager",
+                    "QA Manager",
+                    "QA Team",
+                    "QA & Welfare Manager",
+                    "Laboratory Team",
+                    "Production Manager",
+                    "Technical Supervisor",
+                    "Production Team",
+                    "Farm Manager",
+                    "Farm Supervisor",
+                    "Farm Worker",
+                    "Animexa User",
+                ],
+            ]
+        ],
+    },
+    {
+        "dt": "Workspace",
+        "filters": [
+            ["name", "=", "Animexa"]
+        ],
+    },
+    {
+        "dt": "Workspace Sidebar",
+        "filters": [
+            ["name", "=", "Animexa"]
+        ],
+    },
 ]
 
 # Apps
@@ -296,24 +309,3 @@ after_migrate = ["farm_management.migrate.after_migrate"]
 # ignore_translatable_strings_from = []
 
 
-# Fixtures
-fixtures = [
-    {
-        "dt": "Role",
-        "filters": [
-            ["name", "=", "Animexa User"]
-        ]
-    },
-    {
-        "dt": "Workspace",
-        "filters": [
-            ["name", "=", "Animexa"]
-        ]
-    },
-    {
-        "dt": "Workspace Sidebar",
-        "filters": [
-            ["name", "=", "Animexa"]
-        ]
-    }
-]
