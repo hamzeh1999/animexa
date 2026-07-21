@@ -41,7 +41,7 @@
    "fieldname": "parent_stock_standard",
    "fieldtype": "Link",
    "label": "Parent Stock Standard",
-   "options": "Farm"
+   "options": "Parent Stock Standard"
   },
   {
    "fieldname": "housing_model",
@@ -119,7 +119,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-07-19 12:14:58.827172",
+ "modified": "2026-07-21 08:55:32.052104",
  "modified_by": "Administrator",
  "module": "Farm Management",
  "name": "House",
