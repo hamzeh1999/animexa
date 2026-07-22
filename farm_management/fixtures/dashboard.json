@@ -1,0 +1,33 @@
+[
+ {
+  "cards": [
+   {
+    "card": "Active Farms"
+   },
+   {
+    "card": "Active Houses"
+   },
+   {
+    "card": "Total Flock Capacity"
+   },
+   {
+    "card": "Pending Health Alerts"
+   }
+  ],
+  "chart_options": null,
+  "charts": [
+   {
+    "chart": "House Occupancy Status",
+    "width": "Full"
+   }
+  ],
+  "dashboard_name": "Animexa",
+  "docstatus": 0,
+  "doctype": "Dashboard",
+  "is_default": 0,
+  "is_standard": 0,
+  "modified": "2026-07-21 09:17:52.540733",
+  "module": null,
+  "name": "Animexa"
+ }
+]

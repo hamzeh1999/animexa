@@ -38,6 +38,49 @@ fixtures = [
         ],
     },
     {
+        "dt": "Number Card",
+        "filters": [
+            [
+                "name",
+                "in",
+                [
+                    "Active Farms",
+                    "Active Houses",
+                    "Total Flock Capacity",
+                    "Pending Health Alerts",
+                ],
+            ]
+        ],
+    },
+    {
+        "dt": "Report",
+        "filters": [
+            [
+                "name",
+                "in",
+                [
+                    "Incident Log Report",
+                    "Pending Incident Log Report",
+                    "Vaccination Record Report",
+                    "Water Quality Test Report",
+                    "Visitor Log Report",
+                ],
+            ]
+        ],
+    },
+    {
+        "dt": "Dashboard Chart",
+        "filters": [
+            ["name", "in", ["House Occupancy Status", "Farm Operational Status"]]
+        ],
+    },
+    {
+        "dt": "Dashboard",
+        "filters": [
+            ["name", "=", "Animexa"]
+        ],
+    },
+    {
         "dt": "Workspace",
         "filters": [
             ["name", "=", "Animexa"]
@@ -71,7 +114,7 @@ fixtures = [
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/farm_management/css/farm_management.css"
+app_include_css = "/assets/farm_management/css/animexa_workspace.css"
 # app_include_js = "/assets/farm_management/js/farm_management.js"
 
 # include js, css files in header of web template

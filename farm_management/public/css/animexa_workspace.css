@@ -1,0 +1,135 @@
+/*
+ * Animexa workspace card styling.
+ * Scoped to body[data-route="Workspaces/Animexa"] (set by frappe/public/js/frappe/views/container.js
+ * on every route change) so this never touches other apps' workspaces on the same bench.
+ * card_name / shortcut_name / number_card_name are real attributes Frappe sets on each block's
+ * wrapper element (frappe/public/js/frappe/views/workspace/blocks/block.js).
+ */
+
+body[data-route="Workspaces/Animexa"] {
+	--animexa-green: #2e7d4f;
+	--animexa-blue: #2e6b8a;
+	--animexa-purple: #6b4fa0;
+	--animexa-red: #b23b3b;
+	--animexa-amber: #b8791a;
+	--animexa-hover-shadow: 0 10px 24px -10px rgba(16, 24, 20, 0.25);
+	
+}
+
+@media (prefers-color-scheme: dark) {
+	body[data-route="Workspaces/Animexa"] {
+		--animexa-hover-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.6);
+	}
+}
+
+body[data-route="Workspaces/Animexa"] .widget.number-widget-box,
+body[data-route="Workspaces/Animexa"] .widget.shortcut-widget-box,
+body[data-route="Workspaces/Animexa"] .widget.links-widget-box {
+	position: relative;
+	background: var(--card-bg);
+	border: 1px solid var(--border-color);
+	border-top: 3px solid var(--border-color);
+	border-radius: 12px;
+	transition:
+		box-shadow 0.15s ease,
+		border-color 0.15s ease;
+}
+
+/* Skip the hover lift for users who've asked the OS for reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+	body[data-route="Workspaces/Animexa"] .widget.number-widget-box,
+	body[data-route="Workspaces/Animexa"] .widget.shortcut-widget-box,
+	body[data-route="Workspaces/Animexa"] .widget.links-widget-box {
+		transition:
+			transform 0.15s ease,
+			box-shadow 0.15s ease,
+			border-color 0.15s ease;
+	}
+
+	body[data-route="Workspaces/Animexa"] .widget.number-widget-box:hover,
+	body[data-route="Workspaces/Animexa"] .widget.shortcut-widget-box:hover,
+	body[data-route="Workspaces/Animexa"] .widget.links-widget-box:hover {
+		transform: translateY(-2px);
+	}
+}
+
+body[data-route="Workspaces/Animexa"] .widget.number-widget-box:hover,
+body[data-route="Workspaces/Animexa"] .widget.shortcut-widget-box:hover,
+body[data-route="Workspaces/Animexa"] .widget.links-widget-box:hover {
+	box-shadow: var(--animexa-hover-shadow);
+}
+
+/* Shortcut and module-link cards are keyboard-focusable (role="link", tabindex="0") -
+   give them a visible focus ring instead of the browser's default square outline. */
+body[data-route="Workspaces/Animexa"] .widget.shortcut-widget-box:focus-visible,
+body[data-route="Workspaces/Animexa"] .widget.links-widget-box:focus-visible {
+	outline: none;
+	box-shadow: var(--focus-default);
+}
+
+/*
+ * :hover creates a new stacking context (because of the transform above), which traps the
+ * card-actions dropdown-menu's z-index inside it. Without an explicit z-index bump here, a
+ * later sibling card in the same row paints over the open dropdown instead of behind it, so
+ * clicks on "Edit"/"Refresh" land on the neighboring card. Raise this card above its siblings
+ * only while its own dropdown can be open.
+ */
+body[data-route="Workspaces/Animexa"] .widget.number-widget-box:hover,
+body[data-route="Workspaces/Animexa"] .widget.number-widget-box:focus-within {
+	z-index: 20;
+}
+
+body[data-route="Workspaces/Animexa"] .widget-head .widget-label .widget-title {
+	font-weight: 600;
+}
+
+/* KPI tiles */
+body[data-route="Workspaces/Animexa"] [number_card_name="Active Farms"] .widget { border-top-color: var(--animexa-green); }
+body[data-route="Workspaces/Animexa"] [number_card_name="Active Houses"] .widget { border-top-color: var(--animexa-blue); }
+body[data-route="Workspaces/Animexa"] [number_card_name="Total Flock Capacity"] .widget { border-top-color: var(--animexa-purple); }
+body[data-route="Workspaces/Animexa"] [number_card_name="Pending Health Alerts"] .widget { border-top-color: var(--animexa-red); }
+
+/* Quick action shortcuts */
+body[data-route="Workspaces/Animexa"] [shortcut_name="Create Farm"] .widget { border-top-color: var(--animexa-green); }
+body[data-route="Workspaces/Animexa"] [shortcut_name="Create House"] .widget { border-top-color: var(--animexa-green); }
+body[data-route="Workspaces/Animexa"] [shortcut_name="Add Breed"] .widget { border-top-color: var(--animexa-blue); }
+body[data-route="Workspaces/Animexa"] [shortcut_name="Record Vaccination"] .widget { border-top-color: var(--animexa-amber); }
+body[data-route="Workspaces/Animexa"] [shortcut_name="Log Incident"] .widget { border-top-color: var(--animexa-red); }
+
+/* Module cards */
+body[data-route="Workspaces/Animexa"] [card_name="Farm & House Infrastructure"] .widget { border-top-color: var(--animexa-green); }
+body[data-route="Workspaces/Animexa"] [card_name="Biosecurity & Health"] .widget { border-top-color: var(--animexa-red); }
+body[data-route="Workspaces/Animexa"] [card_name="Genetics & Master Data"] .widget { border-top-color: var(--animexa-purple); }
+body[data-route="Workspaces/Animexa"] [card_name="Feed & Operations Analytics"] .widget { border-top-color: var(--animexa-blue); }
+
+body[data-route="Workspaces/Animexa"] .widget.links-widget-box .link-item:hover .link-content {
+	color: var(--text-color);
+	font-weight: 500;
+}
+
+/*
+ * Frappe's shared .ellipsis rule (white-space: nowrap + text-overflow: ellipsis) clips card
+ * titles like "Farm & House Infrastructure" or "Total Flock Capacity" down to "...". Let the
+ * title wrap onto a second line instead of truncating it, across every card type on this
+ * workspace (KPI tiles, shortcuts, module link cards).
+ */
+body[data-route="Workspaces/Animexa"] .widget.number-widget-box .widget-head,
+body[data-route="Workspaces/Animexa"] .widget.shortcut-widget-box .widget-head,
+body[data-route="Workspaces/Animexa"] .widget.links-widget-box .widget-head {
+	align-items: flex-start;
+}
+
+body[data-route="Workspaces/Animexa"] .widget.number-widget-box .widget-title,
+body[data-route="Workspaces/Animexa"] .widget.shortcut-widget-box .widget-title,
+body[data-route="Workspaces/Animexa"] .widget.links-widget-box .widget-title {
+	align-items: flex-start;
+	height: auto;
+}
+
+body[data-route="Workspaces/Animexa"] .widget.number-widget-box .widget-title .ellipsis,
+body[data-route="Workspaces/Animexa"] .widget.shortcut-widget-box .widget-title .ellipsis,
+body[data-route="Workspaces/Animexa"] .widget.links-widget-box .widget-title .ellipsis {
+	white-space: normal;
+	overflow: visible;
+	text-overflow: unset;
+}

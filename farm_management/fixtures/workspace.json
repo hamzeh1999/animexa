@@ -1,8 +1,13 @@
 [
  {
   "app": "farm_management",
-  "charts": [],
-  "content": "[]",
+  "charts": [
+   {
+    "chart_name": "Farm Operational Status",
+    "label": "Farm Operational Status"
+   }
+  ],
+  "content": "[{\"id\": \"h0title\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h3\\\"><b>Growout &amp; Live Operations</b></span>\", \"col\": 12}}, {\"id\": \"p1intro\", \"type\": \"paragraph\", \"data\": {\"text\": \"Animexa Enterprise &middot; poultry farm operations, biosecurity compliance and live-flock infrastructure.\", \"col\": 12}}, {\"id\": \"chart1\", \"type\": \"chart\", \"data\": {\"chart_name\": \"Farm Operational Status\", \"col\": 12}}, {\"id\": \"sp0\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"h1ov\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Overview</b></span>\", \"col\": 12}}, {\"id\": \"nc1\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Active Farms\", \"col\": 3}}, {\"id\": \"nc2\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Active Houses\", \"col\": 3}}, {\"id\": \"nc3\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Total Flock Capacity\", \"col\": 3}}, {\"id\": \"nc4\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Pending Health Alerts\", \"col\": 3}}, {\"id\": \"sp1\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"h2qa\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Quick Actions</b></span>\", \"col\": 12}}, {\"id\": \"sc1\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Create Farm\", \"col\": 4}}, {\"id\": \"sc2\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Create House\", \"col\": 4}}, {\"id\": \"sc3\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Add Breed\", \"col\": 4}}, {\"id\": \"sc4\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Record Vaccination\", \"col\": 6}}, {\"id\": \"sc6\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"View Dashboard\", \"col\": 6}}, {\"id\": \"sp2\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"h3grid\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Modules</b></span>\", \"col\": 12}}, {\"id\": \"c1\", \"type\": \"card\", \"data\": {\"card_name\": \"Farm & House Infrastructure\", \"col\": 3}}, {\"id\": \"c2\", \"type\": \"card\", \"data\": {\"card_name\": \"Biosecurity & Health\", \"col\": 3}}, {\"id\": \"c3\", \"type\": \"card\", \"data\": {\"card_name\": \"Genetics & Master Data\", \"col\": 3}}, {\"id\": \"c4\", \"type\": \"card\", \"data\": {\"card_name\": \"Feed & Operations Analytics\", \"col\": 3}}]",
   "custom_blocks": [],
   "docstatus": 0,
   "doctype": "Workspace",
@@ -15,25 +20,321 @@
   "label": "Animexa",
   "link_to": null,
   "link_type": null,
-  "links": [],
-  "modified": "2026-07-12 20:47:45.244735",
+  "links": [
+   {
+    "dependencies": null,
+    "description": "Placements, housing density and site allocations.",
+    "hidden": 0,
+    "icon": "building-2",
+    "is_query_report": 0,
+    "label": "Farm & House Infrastructure",
+    "link_count": 2,
+    "link_to": null,
+    "link_type": null,
+    "onboard": 0,
+    "only_for": null,
+    "report_ref_doctype": null,
+    "type": "Card Break"
+   },
+   {
+    "dependencies": "",
+    "description": null,
+    "hidden": 0,
+    "icon": null,
+    "is_query_report": 0,
+    "label": "Farm",
+    "link_count": 0,
+    "link_to": "Farm",
+    "link_type": "DocType",
+    "onboard": 0,
+    "only_for": "",
+    "report_ref_doctype": null,
+    "type": "Link"
+   },
+   {
+    "dependencies": "",
+    "description": null,
+    "hidden": 0,
+    "icon": null,
+    "is_query_report": 0,
+    "label": "House",
+    "link_count": 0,
+    "link_to": "House",
+    "link_type": "DocType",
+    "onboard": 0,
+    "only_for": "",
+    "report_ref_doctype": null,
+    "type": "Link"
+   },
+   {
+    "dependencies": null,
+    "description": "Vaccinations, incident logs, water quality and visitor compliance.",
+    "hidden": 0,
+    "icon": "shield-check",
+    "is_query_report": 0,
+    "label": "Biosecurity & Health",
+    "link_count": 4,
+    "link_to": null,
+    "link_type": null,
+    "onboard": 0,
+    "only_for": null,
+    "report_ref_doctype": null,
+    "type": "Card Break"
+   },
+   {
+    "dependencies": "",
+    "description": null,
+    "hidden": 0,
+    "icon": null,
+    "is_query_report": 1,
+    "label": "Farm Vaccination Record",
+    "link_count": 0,
+    "link_to": "Vaccination Record Report",
+    "link_type": "Report",
+    "onboard": 0,
+    "only_for": "",
+    "report_ref_doctype": null,
+    "type": "Link"
+   },
+   {
+    "dependencies": "",
+    "description": null,
+    "hidden": 0,
+    "icon": null,
+    "is_query_report": 1,
+    "label": "Farm Incident Log",
+    "link_count": 0,
+    "link_to": "Incident Log Report",
+    "link_type": "Report",
+    "onboard": 0,
+    "only_for": "",
+    "report_ref_doctype": null,
+    "type": "Link"
+   },
+   {
+    "dependencies": "",
+    "description": null,
+    "hidden": 0,
+    "icon": null,
+    "is_query_report": 1,
+    "label": "Farm Water Quality Test",
+    "link_count": 0,
+    "link_to": "Water Quality Test Report",
+    "link_type": "Report",
+    "onboard": 0,
+    "only_for": "",
+    "report_ref_doctype": null,
+    "type": "Link"
+   },
+   {
+    "dependencies": "",
+    "description": null,
+    "hidden": 0,
+    "icon": null,
+    "is_query_report": 1,
+    "label": "Farm Visitor Log",
+    "link_count": 0,
+    "link_to": "Visitor Log Report",
+    "link_type": "Report",
+    "onboard": 0,
+    "only_for": "",
+    "report_ref_doctype": null,
+    "type": "Link"
+   },
+   {
+    "dependencies": null,
+    "description": "Breed programs and parent stock growth &amp; density standards.",
+    "hidden": 0,
+    "icon": "dna",
+    "is_query_report": 0,
+    "label": "Genetics & Master Data",
+    "link_count": 2,
+    "link_to": null,
+    "link_type": null,
+    "onboard": 0,
+    "only_for": null,
+    "report_ref_doctype": null,
+    "type": "Card Break"
+   },
+   {
+    "dependencies": "",
+    "description": null,
+    "hidden": 0,
+    "icon": null,
+    "is_query_report": 0,
+    "label": "Breed",
+    "link_count": 0,
+    "link_to": "Breed",
+    "link_type": "DocType",
+    "onboard": 0,
+    "only_for": "",
+    "report_ref_doctype": null,
+    "type": "Link"
+   },
+   {
+    "dependencies": "",
+    "description": null,
+    "hidden": 0,
+    "icon": null,
+    "is_query_report": 0,
+    "label": "Parent Stock Standard",
+    "link_count": 0,
+    "link_to": "Parent Stock Standard",
+    "link_type": "DocType",
+    "onboard": 0,
+    "only_for": "",
+    "report_ref_doctype": null,
+    "type": "Link"
+   },
+   {
+    "dependencies": null,
+    "description": "Build reports and dashboards today &mdash; reserved for Feed Management analytics.",
+    "hidden": 0,
+    "icon": "wheat",
+    "is_query_report": 0,
+    "label": "Feed & Operations Analytics",
+    "link_count": 1,
+    "link_to": null,
+    "link_type": null,
+    "onboard": 0,
+    "only_for": null,
+    "report_ref_doctype": null,
+    "type": "Card Break"
+   },
+   {
+    "dependencies": "",
+    "description": null,
+    "hidden": 0,
+    "icon": null,
+    "is_query_report": 0,
+    "label": "Report",
+    "link_count": 0,
+    "link_to": "Report",
+    "link_type": "DocType",
+    "onboard": 0,
+    "only_for": "",
+    "report_ref_doctype": null,
+    "type": "Link"
+   }
+  ],
+  "modified": "2026-07-21 09:17:53.509358",
   "module": null,
   "name": "Animexa",
-  "number_cards": [],
+  "number_cards": [
+   {
+    "label": "Active Farms",
+    "number_card_name": "Active Farms"
+   },
+   {
+    "label": "Active Houses",
+    "number_card_name": "Active Houses"
+   },
+   {
+    "label": "Total Flock Capacity",
+    "number_card_name": "Total Flock Capacity"
+   },
+   {
+    "label": "Pending Health Alerts",
+    "number_card_name": "Pending Health Alerts"
+   }
+  ],
   "parent_page": null,
   "public": 1,
   "quick_lists": [],
   "restrict_to_domain": null,
   "roles": [
    {
+    "role": "System Manager"
+   },
+   {
     "role": "Animexa User"
    },
    {
-    "role": "System Manager"
+    "role": "Farm Manager"
+   },
+   {
+    "role": "Farm Supervisor"
+   },
+   {
+    "role": "Veterinarian"
+   },
+   {
+    "role": "Production Team"
    }
   ],
   "sequence_id": 23.0,
-  "shortcuts": [],
+  "shortcuts": [
+   {
+    "color": "Green",
+    "doc_view": "New",
+    "format": null,
+    "icon": null,
+    "kanban_board": null,
+    "label": "Create Farm",
+    "link_to": "Farm",
+    "report_ref_doctype": null,
+    "restrict_to_domain": null,
+    "stats_filter": "[]",
+    "type": "DocType",
+    "url": null
+   },
+   {
+    "color": "Green",
+    "doc_view": "New",
+    "format": null,
+    "icon": null,
+    "kanban_board": null,
+    "label": "Create House",
+    "link_to": "House",
+    "report_ref_doctype": null,
+    "restrict_to_domain": null,
+    "stats_filter": "[]",
+    "type": "DocType",
+    "url": null
+   },
+   {
+    "color": "Blue",
+    "doc_view": "New",
+    "format": null,
+    "icon": null,
+    "kanban_board": null,
+    "label": "Add Breed",
+    "link_to": "Breed",
+    "report_ref_doctype": null,
+    "restrict_to_domain": null,
+    "stats_filter": "[]",
+    "type": "DocType",
+    "url": null
+   },
+   {
+    "color": "Orange",
+    "doc_view": null,
+    "format": null,
+    "icon": null,
+    "kanban_board": null,
+    "label": "Record Vaccination",
+    "link_to": "Vaccination Record Report",
+    "report_ref_doctype": "Farm Vaccination Record",
+    "restrict_to_domain": null,
+    "stats_filter": "[]",
+    "type": "Report",
+    "url": null
+   },
+   {
+    "color": "Grey",
+    "doc_view": null,
+    "format": null,
+    "icon": null,
+    "kanban_board": null,
+    "label": "View Dashboard",
+    "link_to": "Animexa",
+    "report_ref_doctype": null,
+    "restrict_to_domain": null,
+    "stats_filter": "[]",
+    "type": "Dashboard",
+    "url": null
+   }
+  ],
   "title": "Animexa",
   "type": "Workspace"
  }
