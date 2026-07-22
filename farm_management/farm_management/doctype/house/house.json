@@ -10,7 +10,6 @@
   "farm",
   "status",
   "house_orientation",
-  "parent_stock_standard",
   "housing_model",
   "house_phase",
   "column_break_pbho",
@@ -36,12 +35,6 @@
    "label": "Farm",
    "options": "Farm",
    "reqd": 1
-  },
-  {
-   "fieldname": "parent_stock_standard",
-   "fieldtype": "Link",
-   "label": "Parent Stock Standard",
-   "options": "Parent Stock Standard"
   },
   {
    "fieldname": "housing_model",
@@ -119,7 +112,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-07-21 08:55:32.052104",
+ "modified": "2026-07-22 12:15:45.973445",
  "modified_by": "Administrator",
  "module": "Farm Management",
  "name": "House",
