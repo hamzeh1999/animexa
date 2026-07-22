@@ -1,992 +1,163 @@
 {% extends "templates/web.html" %}
+
+{% set web_include_css = (web_include_css or []) | reject("equalto", "/assets/farm_management/css/global_loader.css") | list %}
+{% set web_include_js = (web_include_js or []) | reject("equalto", "/assets/farm_management/js/global_loader.js") | list %}
+
 {% block navbar %}
 {% if show_language_picker %}
     {{ super() }}
 {% endif %}
 {% endblock %}
+
 {% macro email_login_body() -%}
 {% if not disable_user_pass_login or (ldap_settings and ldap_settings.enabled) %}
 <div class="page-card-body">
-	<div class="form-group">
-		<label class="form-label animexa-field-label" for="login_email">{{ _("Email or username") }}</label>
-		<div class="email-field">
-			<input type="text" id="login_email" class="form-control"
-				placeholder="{% if login_name_placeholder %}{{ login_name_placeholder  }}{% else %}{{ _('jane@example.com') }}{% endif %}"
-				required autofocus autocomplete="username">
+    <div class="form-group">
+        <label class="form-label animexa-field-label" for="login_email">{{ _("Email or username") }}</label>
+        <div class="email-field">
+            <input type="text" id="login_email" class="form-control" placeholder="{% if login_name_placeholder %}{{ login_name_placeholder }}{% else %}{{ _('jane@example.com') }}{% endif %}" required autofocus autocomplete="username">
+            <svg class="field-icon email-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <use class="es-lock" href="#es-line-email"></use>
+            </svg>
+        </div>
+    </div>
 
-			<svg class="field-icon email-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"
-				xmlns="http://www.w3.org/2000/svg">
-				<use class="es-lock" href="#es-line-email"></use>
-			</svg>
-		</div>
-	</div>
+    <div class="form-group">
+        <label class="form-label animexa-field-label" for="login_password">{{ _("Password") }}</label>
+        <div class="password-field">
+            <input type="password" id="login_password" class="form-control" placeholder="•••••" autocomplete="current-password" required>
+            <svg class="field-icon password-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <use class="es-lock" href="#es-line-lock"></use>
+            </svg>
+            <span toggle="#login_password" class="toggle-password text-muted">{{ _('Show') }}</span>
+        </div>
+    </div>
 
-	<div class="form-group">
-		<label class="form-label animexa-field-label" for="login_password">{{ _("Password") }}</label>
-		<div class="password-field">
-			<input type="password" id="login_password" class="form-control" placeholder="•••••"
-				autocomplete="current-password" required>
-
-			<svg class="field-icon password-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"
-				xmlns="http://www.w3.org/2000/svg">
-					<use class="es-lock" href="#es-line-lock"></use>
-			</svg>
-			<span toggle="#login_password" class="toggle-password text-muted">{{ _('Show') }}</span>
-		</div>
-	</div>
-
-	{% if not disable_user_pass_login %}
-	<p class="forgot-password-message">
-		<a href="#forgot">{{ _("Forgot Password?") }}</a>
-	</p>
-	{% endif %}
+    {% if not disable_user_pass_login %}
+    <p class="forgot-password-message"><a href="#forgot">{{ _("Forgot Password?") }}</a></p>
+    {% endif %}
 </div>
 {% endif %}
 <div class="page-card-actions">
-	{% if not disable_user_pass_login %}
-	<button class="btn btn-sm btn-primary btn-block btn-login" type="submit">
-		{{ _("Login") }}</button>
-	{% endif %}
-	{% if ldap_settings and ldap_settings.enabled %}
-	<button class="btn btn-sm {{ "btn-primary" if disable_user_pass_login else "btn-default" }} btn-block btn-login btn-ldap-login">
-		{{ _("Login with LDAP") }}</button>
-	{% endif %}
+    {% if not disable_user_pass_login %}
+    <button class="btn btn-sm btn-primary btn-block btn-login" type="submit">{{ _("Login") }}</button>
+    {% endif %}
+    {% if ldap_settings and ldap_settings.enabled %}
+    <button class="btn btn-sm {{ 'btn-primary' if disable_user_pass_login else 'btn-default' }} btn-block btn-login btn-ldap-login">{{ _("Login with LDAP") }}</button>
+    {% endif %}
 </div>
 {%- endmacro %}
 
-{% block head_include %}
-{{ include_style('login.bundle.css') }}
-<style>
-:root {
-	--animexa-navy: #071722;
-	--animexa-cyan: #25C8F2;
-	--animexa-blue: #168EF5;
-	--animexa-mint: #52E6B0;
-	--animexa-ink: #F4F7FA;
-	--animexa-gradient: linear-gradient(135deg, #168EF5 0%, #25C8F2 48%, #52E6B0 100%);
-}
-
-html, body {
-	height: 100%;
-}
-
-body {
-	overflow-x: hidden;
-}
-
-body .web-footer {
-	display: none;
-}
-
-/* .animexa-login-shell {
-	display: flex;
-	min-height: 100dvh;
-	width: 100%;
-	background: var(--animexa-navy);
-	color: var(--animexa-ink);
-	overflow: hidden;
-} */
-
-.animexa-login-shell {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: clamp(3rem, 8vw, 9rem);
-    min-height: 100vh;
-    min-height: 100dvh;
-    width: 100%;
-    padding: clamp(2rem, 5vw, 5rem);
-    background: #061a2b;
-    color: #f4f7fa;
-    overflow-x: hidden;
-}
-
-
-.animexa-brand-panel {
-	/* position: relative;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	gap: 0.95rem;
-	text-align: center;
-	flex: 0 0 48%;
-	padding: clamp(1.5rem, 3vw, 3.25rem);
-	background:
-		radial-gradient(circle at 18% 22%, rgba(37, 200, 242, 0.16), transparent 18%),
-		radial-gradient(circle at 82% 28%, rgba(82, 230, 176, 0.11), transparent 18%),
-		radial-gradient(circle at 50% 50%, rgba(22, 142, 245, 0.08), transparent 52%),
-		repeating-linear-gradient(90deg, rgba(244, 247, 250, 0.05) 0 1px, transparent 1px 36px),
-		repeating-linear-gradient(0deg, rgba(244, 247, 250, 0.035) 0 1px, transparent 1px 36px),
-		var(--animexa-navy);
-	isolation: isolate; */
-
-    
-    position: relative;
-    display: flex;
-    flex: 0 1 500px;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 2rem;
-    background: transparent;
-    color: #ffffff;
-
-
-
-
-}
-
-.animexa-brand-panel::before,
-.animexa-brand-panel::after {
-	/* content: "";
-	position: absolute;
-	inset: auto;
-	border-radius: 999px;
-	filter: blur(28px);
-	opacity: 0.9;
-	pointer-events: none;  */
-    display: none;
-}
-
-.animexa-brand-panel::before {
-	width: min(30vw, 22rem);
-	height: min(30vw, 22rem);
-	background: rgba(37, 200, 242, 0.18);
-	top: 12%;
-	left: 12%;
-}
-
-.animexa-brand-panel::after {
-	width: min(24vw, 18rem);
-	height: min(24vw, 18rem);
-	background: rgba(82, 230, 176, 0.15);
-	bottom: 10%;
-	right: 14%;
-}
-
-.animexa-brand-mark {
-	/* position: relative;
-	display: block;
-	width: min(72%, 30rem);
-	height: min(72%, 18rem);
-	max-width: 100%;
-	max-height: 100%;
-	object-fit: contain;
-	background: transparent;
-	filter: brightness(1.18) saturate(1.08);
-	mix-blend-mode: screen; */
-    
-    display: block;
-    width: min(100%, 360px);
-    height: auto;
-    max-height: 390px;
-    object-fit: contain;
-    object-position: center;
-    background: transparent;
-    filter: none;
-    mix-blend-mode: normal;
-
-    
-}
-.animexa-brand-copy {
-    position: relative;
-    z-index: 2;
-    max-width: 32rem;
-    text-align: center;
-}
-
-.animexa-brand-copy h4 {
-    margin: 0;
-    color: #ffffff;
-    font-size: clamp(1.35rem, 2vw, 1.8rem);
-    line-height: 1.25;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-}
-
-.animexa-brand-copy p {
-    margin: 0.55rem 0 0;
-    color: rgba(244, 247, 250, 0.78);
-    font-size: clamp(0.9rem, 1.2vw, 1rem);
-    line-height: 1.5;
-    font-weight: 400;
-}
-
-.animexa-login-panel {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex: 0 0 52%;
-	min-width: 0;
-	padding: clamp(1rem, 3vw, 3rem);
-	background: linear-gradient(180deg, #f7fafc 0%, #eef4f8 100%);
-	color: #0f1720;
-}
-
-.animexa-login-stage {
-	width: 100%;
-	max-width: 460px;
-}
-
-.animexa-auth-card {
-	width: 100%;
-	max-width: 460px;
-	margin-inline: auto;
-	padding: clamp(1.25rem, 3vw, 1.75rem);
-	border: 1px solid #d9e2e8;
-	border-radius: 20px;
-	background: #ffffff;
-	box-shadow: 0 16px 40px rgba(15, 23, 32, 0.08);
-}
-
-.animexa-auth-card .page-card-head {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 0.8rem;
-	margin-bottom: 1.4rem;
-	padding: 0;
-}
-
-.animexa-auth-card .page-card-head img {
-	display: block;
-	width: 40px;
-	height: 40px;
-	object-fit: contain;
-	background: transparent;
-}
-
-.animexa-auth-card .page-card-head h4 {
-	margin: 0;
-	font-size: clamp(1.6rem, 2.2vw, 2rem);
-	line-height: 1.08;
-	font-weight: 800;
-	letter-spacing: -0.03em;
-	color: #071722;
-}
-
-.animexa-auth-card .page-card-head p {
-	margin: 0.45rem 0 0;
-	font-size: 0.98rem;
-	line-height: 1.5;
-	color: rgba(7, 23, 34, 0.72);
-}
-
-.animexa-auth-card .page-card-body {
-	padding: 0;
-}
-
-.animexa-auth-card .page-card-actions {
-	padding: 0;
-}
-
-.animexa-auth-card .form-group {
-	margin-bottom: 1rem;
-}
-
-.animexa-auth-card .form-control {
-	height: 3.45rem;
-	border-radius: 16px;
-	border: 1px solid rgba(7, 23, 34, 0.12);
-	background: #ffffff;
-	color: #071722;
-	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.84) inset;
-}
-
-.animexa-auth-card .form-control:focus {
-	border-color: rgba(37, 200, 242, 0.85);
-	box-shadow: 0 0 0 0.22rem rgba(37, 200, 242, 0.14);
-}
-
-.animexa-auth-card .email-field,
-.animexa-auth-card .password-field {
-	position: relative;
-}
-
-.animexa-auth-card .field-icon {
-	color: rgba(7, 23, 34, 0.48);
-}
-
-.animexa-auth-card .email-field .field-icon,
-.animexa-auth-card .password-field .field-icon {
-	top: 50%;
-	transform: translateY(-50%);
-}
-
-.animexa-auth-card .toggle-password {
-	right: 1rem;
-	font-weight: 600;
-	color: var(--animexa-blue) !important;
-}
-
-.animexa-auth-card .forgot-password-message,
-.animexa-auth-card .sign-up-message {
-	margin-bottom: 0;
-}
-
-.animexa-auth-card .forgot-password-message a,
-.animexa-auth-card .sign-up-message a {
-	color: var(--animexa-blue);
-	font-weight: 600;
-}
-
-.animexa-auth-card .btn-primary,
-.animexa-auth-card .btn-login,
-.animexa-auth-card .btn-forgot,
-.animexa-auth-card .btn-login-with-email-link {
-	border: 0;
-	border-radius: 16px;
-	background: var(--animexa-gradient);
-	box-shadow: 0 16px 30px rgba(22, 142, 245, 0.22);
-	font-weight: 700;
-	color: #ffffff;
-}
-
-.animexa-auth-card .btn-primary:hover,
-.animexa-auth-card .btn-login:hover,
-.animexa-auth-card .btn-forgot:hover,
-.animexa-auth-card .btn-login-with-email-link:hover {
-	filter: brightness(1.02);
-	color: #ffffff;
-}
-
-.animexa-auth-card .btn-default {
-	border-radius: 16px;
-	border-color: rgba(7, 23, 34, 0.12);
-	background: #ffffff;
-	color: #071722;
-}
-
-.animexa-auth-card .social-logins {
-	margin-top: 1rem;
-}
-
-.animexa-auth-card .login-divider {
-	margin: 1rem 0;
-	color: rgba(7, 23, 34, 0.46);
-}
-
-.animexa-auth-card .btn-login-option {
-	border-radius: 16px;
-}
-
-.animexa-auth-card .invalid-login {
-	animation: animexa-login-shake 0.35s ease-in-out;
-}
-
-@keyframes animexa-login-shake {
-	0%, 100% { transform: translateX(0); }
-	20% { transform: translateX(-3px); }
-	40% { transform: translateX(3px); }
-	60% { transform: translateX(-2px); }
-	80% { transform: translateX(2px); }
-}
-
-@media (min-width: 992px) {
-	.animexa-brand-panel {
-		flex-basis: 48%;
-	}
-
-	.animexa-login-panel {
-		flex-basis: 52%;
-	}
-}
-
-@media (min-width: 768px) and (max-width: 991.98px) {
-	.animexa-brand-panel {
-		flex-basis: 42%;
-	}
-
-	.animexa-login-panel {
-		flex-basis: 58%;
-	}
-}
-
-@media (max-width: 767.98px) {
-	.animexa-login-shell {
-		flex-direction: column;
-	}
-
-	.animexa-brand-panel {
-		flex: 0 0 auto;
-		min-height: 240px;
-		height: 240px;
-		max-height: 240px;
-		padding: 1rem 1rem 1.15rem;
-	}
-
-	.animexa-brand-mark {
-		width: min(68%, 18rem);
-		height: min(68%, 12rem);
-	}
-
-	.animexa-login-panel {
-		flex: 1 1 auto;
-		padding: 1rem;
-	}
-
-	.animexa-auth-card {
-		border-radius: 18px;
-		padding: 1.1rem;
-	}
-}
-
-:dir(rtl) .animexa-login-shell {
-	direction: rtl;
-}
-
-@media (min-width: 768px) {
-	:dir(rtl) .animexa-login-shell {
-		flex-direction: row-reverse;
-	}
-
-	:dir(rtl) .animexa-login-panel {
-		direction: rtl;
-	}
-}
-
-:dir(rtl) .animexa-brand-panel::before {
-	left: auto;
-	right: 12%;
-}
-
-:dir(rtl) .animexa-brand-panel::after {
-	right: auto;
-	left: 14%;
-}
-
-:dir(rtl) .animexa-auth-card .toggle-password {
-	right: auto;
-	left: 1rem;
-}
-.animexa-brand-subtitle {
-    margin: 0.55rem 0 0;
-    color: rgba(244, 247, 250, 0.82);
-    font-size: clamp(0.9rem, 1.2vw, 1rem);
-    line-height: 1.5;
-    font-weight: 400;
-}
-
-
-
-
-
-
-
-
-.animexa-security-note {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.4rem;
-    margin: 0.4rem 0 0;
-    color: rgba(244, 247, 250, 0.52);
-    font-size: 0.72rem;
-    line-height: 1.4;
-    font-weight: 400;
-    letter-spacing: 0.01em;
-}
-
-.animexa-security-note svg {
-    flex: 0 0 auto;
-    color: var(--animexa-mint);
-    opacity: 0.75;
-}
-
-
-/* ==================================================
-   توحيد خلفية صفحة تسجيل الدخول بالكامل
-   ================================================== */
-
-html,
-body {
-    min-height: 100%;
-    background: #eaf7ff !important;
-}
-
-body {
-    margin: 0;
-    background:
-        linear-gradient(
-            135deg,
-            #ffffff 0%,
-            #f4fbff 25%,
-            #e1f4ff 50%,
-            #c5e9ff 75%,
-            #9ed7fa 100%
-        ) !important;
-}
-
-/* الخلفية الرئيسية */
-.animexa-login-shell {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: clamp(3rem, 8vw, 9rem);
-
-    width: 100%;
-    min-height: 100vh;
-    min-height: 100dvh;
-
-    padding: clamp(2rem, 5vw, 5rem);
-
-    background:
-        linear-gradient(
-            135deg,
-            #ffffff 0%,
-            #f4fbff 25%,
-            #e1f4ff 50%,
-            #c5e9ff 75%,
-            #9ed7fa 100%
-        ) !important;
-
-    color: #071722;
-    overflow-x: hidden;
-}
-
-/* جهة الشعار تستخدم نفس الخلفية */
-.animexa-brand-panel {
-    position: relative;
-    display: flex;
-    flex: 0 1 500px;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    padding: 2rem;
-
-    color: #071722;
-    text-align: center;
-
-    background: transparent !important;
-}
-
-/* جهة بطاقة تسجيل الدخول تستخدم نفس الخلفية */
-.animexa-login-panel {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex: 0 0 52%;
-
-    min-width: 0;
-    padding: clamp(1rem, 3vw, 3rem);
-
-    color: #0f1720;
-    background: transparent !important;
-}
-
-/* إزالة أي دوائر أو خلفيات إضافية قديمة */
-.animexa-brand-panel::before,
-.animexa-brand-panel::after {
-    display: none !important;
-}
-
-/* جعل الصورة دائرية */
-.animexa-brand-mark {
-    display: block;
-
-    width: min(100%, 360px);
-    height: min(32vw, 360px);
-    aspect-ratio: 1 / 1;
-
-    padding: clamp(1.5rem, 3vw, 2.5rem);
-
-    border: 1px solid rgba(255, 255, 255, 0.9);
-    border-radius: 50%;
-
-    object-fit: contain;
-    object-position: center;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255, 255, 255, 0.98),
-            rgba(229, 247, 255, 0.94)
-        );
-
-    box-shadow:
-        0 24px 55px rgba(22, 142, 245, 0.17),
-        0 8px 24px rgba(7, 23, 34, 0.08);
-
-    filter: none;
-    mix-blend-mode: normal;
-}
-
-/* تعديل لون نصوص قسم الشعار لتناسب الخلفية الفاتحة */
-.animexa-brand-copy h1 {
-    margin: 0;
-    color: #071722;
-    font-size: clamp(2rem, 4vw, 3.4rem);
-    font-weight: 900;
-    line-height: 1;
-    letter-spacing: 0.08em;
-}
-
-.animexa-brand-copy h2 {
-    margin: 0.75rem 0 0;
-    color: #0c4f78;
-    font-size: clamp(1.15rem, 2vw, 1.65rem);
-    font-weight: 700;
-    line-height: 1.3;
-}
-
-.animexa-brand-copy h4 {
-    color: #071722;
-}
-
-.animexa-brand-copy p,
-.animexa-brand-subtitle {
-    color: rgba(7, 23, 34, 0.68);
-}
-
-.animexa-security-note {
-    color: rgba(7, 23, 34, 0.52);
-}
-
-.animexa-security-note svg {
-    color: #168ef5;
-}
-
-/* جعل البطاقة متناسقة مع الخلفية والصورة الدائرية */
-.animexa-auth-card {
-    width: 100%;
-    max-width: 460px;
-
-    margin-inline: auto;
-    padding: clamp(1.25rem, 3vw, 1.75rem);
-
-    border: 1px solid rgba(255, 255, 255, 0.9);
-    border-radius: 28px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255, 255, 255, 0.96),
-            rgba(244, 251, 255, 0.9)
-        ) !important;
-
-    box-shadow:
-        0 30px 70px rgba(22, 142, 245, 0.16),
-        0 12px 30px rgba(7, 23, 34, 0.07);
-
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-}
-
-/* جعل شعار البطاقة دائريًا */
-.animexa-auth-card .page-card-head img {
-    display: block;
-
-    width: 52px;
-    height: 52px;
-    padding: 7px;
-
-    border: 1px solid rgba(22, 142, 245, 0.14);
-    border-radius: 50%;
-
-    object-fit: contain;
-
-    background:
-        linear-gradient(
-            145deg,
-            #e3f6ff,
-            #ffffff
-        );
-
-    box-shadow:
-        0 9px 22px rgba(22, 142, 245, 0.13);
-}
-
-/* الهاتف */
-@media (max-width: 767.98px) {
-    .animexa-login-shell {
-        flex-direction: column;
-        gap: 1.25rem;
-
-        padding: 1.25rem 1rem 2rem;
-
-        background:
-            linear-gradient(
-                180deg,
-                #d8f1ff 0%,
-                #ecf9ff 45%,
-                #ffffff 100%
-            ) !important;
-    }
-
-    .animexa-brand-panel {
-        flex: 0 0 auto;
-
-        width: 100%;
-        height: auto;
-        min-height: auto;
-        max-height: none;
-
-        padding: 1rem;
-        background: transparent !important;
-    }
-
-    .animexa-brand-mark {
-        width: 200px;
-        height: 200px;
-        padding: 1.5rem;
-    }
-
-    .animexa-login-panel {
-        flex: 1 1 auto;
-
-        width: 100%;
-        padding: 0;
-
-        background: transparent !important;
-    }
-
-    .animexa-auth-card {
-        border-radius: 22px;
-        padding: 1.1rem;
-    }
-}
-
-</style>
-{% endblock %}
-
 {% macro logo_section(title=null) %}
 <div class="page-card-head{% if not title %} animexa-hero-head{% endif %}">
-	<img class="app-logo animexa-card-logo" src="/assets/farm_management/icons/desktop_icons/solid/animexa.svg" alt="{{ _('Animexa') }}">
-	<div class="animexa-card-copy">
-		{% if title %}
-		<h4>{{ _(title)}}</h4>
-		{% else %}
-		<h4>{{ _('Welcome Back') }}</h4>
-		<p>{{ _('Sign in to continue to ANIMEXA') }}</p>
-		{% endif %}
-	</div>
+    <img class="app-logo animexa-card-logo" src="/assets/farm_management/icons/desktop_icons/solid/animexa.svg" alt="{{ _('Animexa') }}">
+    <div class="animexa-card-copy">
+        {% if title %}
+        <h4>{{ _(title)}}</h4>
+        {% else %}
+        <h4>{{ _('Welcome Back') }}</h4>
+        <p>{{ _('Sign in to continue to ANIMEXA') }}</p>
+        {% endif %}
+    </div>
 </div>
 {% endmacro %}
 
-{% block page_content %}
-
-<!-- {{ for_test }} -->
-<div class="animexa-login-shell">
-	<aside class="animexa-brand-panel" aria-label="{{ _('Animexa branding') }}">
-		<img class="animexa-brand-mark" src="/assets/farm_management/icons/desktop_icons/solid/animexa.svg" alt="{{ _('Animexa') }}">
-
-		<!-- <div class="animexa-brand-copy">
-    <h4>{{ _("Intelligent Farm Management") }}</h4>
-    <p class="animexa-brand-subtitle">
-        {{ _("Smart operations. Secure access") }}
-    </p>
-
-    <p class="animexa-security-note">
-        <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none">
-            <path
-                d="M7 10V8a5 5 0 0 1 10 0v2M6 10h12a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1Z"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-            />
-        </svg> -->
-       <!---- <span>{{ _("Protected by secure authentication") }}</span>
-    </p>
-</div> -->
-<div class="animexa-brand-copy">
-    <h1>ANIMEXA</h1>
-
-    <h2>{{ _("Intelligent Farm Management") }}</h2>
-
-    <p class="animexa-brand-subtitle">
-        {{ _("Smart operations. Secure access.") }}
-    </p>
-
-    <p class="animexa-security-note">
-        <svg aria-hidden="true" width="16" height="16"
-            viewBox="0 0 24 24" fill="none">
-            <path
-                d="M7 10V8a5 5 0 0 1 10 0v2M6 10h12a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1Z"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-            />
-        </svg>
-
-        <span>{{ _("Protected by secure authentication") }}</span>
-    </p>
-</div>
-
-
-	</aside>
-
-	<main class="animexa-login-panel">
-		<div class="animexa-login-stage">
-			<noscript>
-				<div class="text-center my-5">
-					<h4>{{ _("Javascript is disabled on your browser") }}</h4>
-					<p class="text-muted">
-						{{ _("You need to enable JavaScript for your app to work.") }}<br>{{ _("To enable it follow the instructions in the following link: {0}").format("<a href='https://enable-javascript.com/'>enable-javascript.com</a></p>") }}
-				</div>
-			</noscript>
-
-			<section class='for-login'>
-				<div class="login-content page-card animexa-auth-card">
-					{{ logo_section() }}
-					<form class="form-signin form-login" role="form">
-						{{ email_login_body() }}
-						{% if social_login or login_with_email_link %}
-						<div class="social-logins text-center">
-							{% if not disable_user_pass_login or (ldap_settings and ldap_settings.enabled) %}
-							<p class="text-muted login-divider">{{ _("or") }}</p>
-							{% endif %}
-							<div class="social-login-buttons">
-								{% for provider in provider_logins %}
-								<div class="login-button-wrapper">
-									<a href="{{ provider.auth_url }}"
-										class="btn btn-block btn-default btn-sm btn-login-option btn-{{ provider.name }}">
-										{% if provider.icon %}
-											{{ provider.icon }}
-										{% endif %}
-										{{ _("Login with {0}").format(provider.provider_name) }}</a>
-								</div>
-								{% endfor %}
-							</div>
-
-							{% if login_with_frappe_cloud_url %}
-							<div class="social-login-buttons">
-								<div class="login-button-wrapper">
-									<a href="{{ login_with_frappe_cloud_url }}"
-										class="btn btn-block btn-default btn-sm btn-login-option btn-login-with-frappe-cloud">
-										<svg class="mr-2" width="24" height="20" viewBox="0 5 23 23" fill="none"
-											xmlns="http://www.w3.org/2000/svg">
-											<path
-												d="M24.5011 14.1124C23.3954 12.4873 21.532 11.5477 19.594 11.6747C18.7616 10.1384 17.2211 9.12267 15.4198 9.0084C14.1651 8.93222 12.8979 9.3766 11.9165 10.24C11.2456 10.8367 10.7611 11.5223 10.463 12.2968C10.289 12.7539 9.89151 13.0459 9.46912 13.0459H6.5V15.5852H9.46912C10.9226 15.5852 12.2271 14.6584 12.7737 13.2237C12.9227 12.8301 13.1712 12.4873 13.5439 12.1571C14.0284 11.7255 14.662 11.4969 15.2583 11.535C16.1528 11.5985 16.7863 12.0175 17.1839 12.538C17.6063 13.0205 17.8423 13.7696 17.979 14.5187C18.774 14.2902 19.6437 14.0997 20.476 14.2394C21.1593 14.3536 21.7929 14.7218 22.2525 15.2678C22.327 15.3567 22.4016 15.4456 22.4637 15.5471C23.06 16.4232 23.1718 17.5024 22.7743 18.5689C22.414 19.5592 21.0847 20.4607 19.9791 20.4607H11.3326C10.1524 20.4607 9.18339 19.5592 9.03432 18.4038H6.54969C6.71119 20.9686 8.78585 23 11.3326 23H19.9915C22.1283 23 24.3769 21.451 25.1098 19.4704C25.7931 17.6167 25.5695 15.6614 24.5135 14.0997L24.5011 14.1124Z"
-												fill="currentColor" />
-										</svg>
-										{{ _("Login with Frappe Cloud") }}</a>
-								</div>
-							</div>
-							{% endif %}
-
-							{% if login_with_email_link %}
-							<div class="login-with-email-link social-login-buttons">
-								<div class="login-button-wrapper">
-									<a href="#login-with-email-link"
-										class="btn btn-block btn-default btn-sm btn-login-option btn-login-with-email-link">
-										{{ _("Login with Email Link") }}</a>
-								</div>
-							</div>
-							{% endif %}
-						</div>
-						{% endif %}
-					</form>
-					<div class="animexa-login-status" aria-live="polite"></div>
-				</div>
-				{%- if not disable_signup and not disable_user_pass_login -%}
-				<div class="text-center sign-up-message">
-					{{ _("Don't have an account?") }}
-					<a href="#signup">{{ _("Sign up") }}</a>
-				</div>
-				{%- endif -%}
-			</section>
-
-			{%- if social_login -%}
-			<section class='for-email-login'>
-				<div class="login-content page-card animexa-auth-card">
-					{{ logo_section() }}
-					<form class="form-signin form-login" role="form">
-						{{ email_login_body() }}
-					</form>
-					<div class="animexa-login-status" aria-live="polite"></div>
-					<div class="animexa-card-footer">{{ _("Protected by secure authentication") }}</div>
-				</div>
-				{%- if not disable_signup and not disable_user_pass_login -%}
-				<div class="text-center sign-up-message">
-					{{ _("Don't have an account?") }}
-					<a href="#signup">{{ _("Sign up") }}</a>
-				</div>
-				{%- endif -%}
-			</section>
-			{%- endif -%}
-			<section class='for-signup {{ "signup-disabled" if disable_signup else "" }}'>
-				<div class="login-content page-card animexa-auth-card">
-					{{ logo_section(_('Create a {0} Account').format(app_name or _("Frappe"))) }}
-					{%- if not disable_signup -%}
-					{{ signup_form_template }}
-					{%- else -%}
-					<div class='page-card-head mb-2'>
-						<span class='indicator gray'>{{_("Signup Disabled")}}</span>
-						<p class="text-muted text-normal sign-up-message mt-1 mb-8">{{_("Signups have been disabled for this website.")}}</p>
-						<div><a href='/' class='btn btn-primary btn-md'>{{ _("Home") }}</a></div>
-					</div>
-					{%- endif -%}
-				</div>
-
-			</section>
-
-			<section class='for-forgot'>
-				<div class="login-content page-card animexa-auth-card">
-					{{ logo_section('Forgot Password') }}
-					<form class="form-signin form-forgot hide" role="form">
-						<div class="page-card-body">
-							<div class="email-field">
-								<input type="email" id="forgot_email" class="form-control"
-									placeholder="{{ _('Email Address') }}" required autofocus autocomplete="username">
-								<svg class="field-icon email-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"
-									xmlns="http://www.w3.org/2000/svg">
-									<use class="es-lock" href="#es-line-email"></use>
-								</svg>
-
-							</div>
-						</div>
-						<div class="page-card-actions">
-							<button class="btn btn-sm btn-primary btn-block btn-forgot"
-								type="submit">{{ _("Reset Password") }}</button>
-							<p class="text-center sign-up-message">
-								<a href="#login">{{ _("Back to Login") }}</a>
-							</p>
-						</div>
-
-					</form>
-				</div>
-			</section>
-
-			<section class='for-login-with-email-link'>
-				<div class="login-content page-card animexa-auth-card">
-					{{ logo_section(_('Login with Email Link')) }}
-					<form class="form-signin form-login-with-email-link hide" role="form">
-						<div class="page-card-body">
-							<div class="email-field">
-								<input type="email" id="login_with_email_link_email" class="form-control"
-									placeholder="{{ _('Email Address') }}" required autofocus autocomplete="username">
-								<svg class="field-icon email-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"
-									xmlns="http://www.w3.org/2000/svg">
-									<use class="es-lock" href="#es-line-email"></use>
-								</svg>
-							</div>
-						</div>
-						<div class="page-card-actions">
-							<button class="btn btn-sm btn-primary btn-block btn-login-with-email-link"
-								type="submit">{{ _("Send login link") }}</button>
-							<p class="text-center sign-up-message">
-								<a href="#login">{{ _("Back to Login") }}</a>
-							</p>
-						</div>
-					</form>
-					<div class="animexa-login-status" aria-live="polite"></div>
-					<div class="animexa-card-footer">{{ _("Protected by secure authentication") }}</div>
-				</div>
-			</section>
-		</div>
-	</main>
-</div>
+{% block head_include %}
+    {{ include_style('login.bundle.css') }}
+    <style>
+      
+        :root {
+            --animexa-navy: #071722;
+            --animexa-cyan: #25C8F2;
+            --animexa-blue: #168EF5;
+            --animexa-mint: #52E6B0;
+            --animexa-ink: #F4F7FA;
+            --animexa-gradient: linear-gradient(135deg, #168EF5 0%, #25C8F2 48%, #52E6B0 100%);
+        }
+        html, body { height: 100%; min-height: 100%; background: #eaf7ff !important; }
+        body { overflow-x: hidden; margin: 0; background: linear-gradient(135deg, #ffffff 0%, #f4fbff 25%, #e1f4ff 50%, #c5e9ff 75%, #9ed7fa 100%) !important; }
+        body .web-footer { display: none; }
+        .animexa-login-shell { display: flex; align-items: center; justify-content: center; gap: clamp(3rem, 8vw, 9rem); width: 100%; min-height: 100vh; padding: clamp(2rem, 5vw, 5rem); color: #071722; overflow-x: hidden; }
+        .animexa-brand-panel { position: relative; display: flex; flex: 0 1 500px; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; text-align: center; background: transparent !important; }
+        .animexa-login-panel { display: flex; align-items: center; justify-content: center; flex: 0 0 52%; min-width: 0; padding: clamp(1rem, 3vw, 3rem); background: transparent !important; }
+        .animexa-brand-mark { display: block; width: min(100%, 360px); height: min(32vw, 360px); aspect-ratio: 1/1; padding: clamp(1.5rem, 3vw, 2.5rem); border: 1px solid rgba(255,255,255,0.9); border-radius: 50%; object-fit: contain; object-position: center; background: linear-gradient(145deg, rgba(255,255,255,0.98), rgba(229,247,255,0.94)); box-shadow: 0 24px 55px rgba(22,142,245,0.17), 0 8px 24px rgba(7,23,34,0.08); }
+        .animexa-brand-copy h1 { margin: 0; color: #071722; font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 900; line-height: 1; letter-spacing: 0.08em; }
+        .animexa-brand-copy h2 { margin: 0.75rem 0 0; color: #0c4f78; font-size: clamp(1.15rem, 2vw, 1.65rem); font-weight: 700; line-height: 1.3; }
+        .animexa-brand-copy p, .animexa-brand-subtitle { color: rgba(7,23,34,0.68); }
+        .animexa-security-note { display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem; margin: 0.4rem 0 0; color: rgba(7,23,34,0.52); font-size: 0.72rem; }
+        .animexa-security-note svg { color: #168ef5; flex: 0 0 auto; opacity: 0.75; }
+        .animexa-auth-card { width: 100%; max-width: 460px; margin-inline: auto; padding: clamp(1.25rem, 3vw, 1.75rem); border: 1px solid rgba(255,255,255,0.9); border-radius: 28px; background: linear-gradient(145deg, rgba(255,255,255,0.96), rgba(244,251,255,0.9)) !important; box-shadow: 0 30px 70px rgba(22,142,245,0.16), 0 12px 30px rgba(7,23,34,0.07); backdrop-filter: blur(16px); }
+        .animexa-auth-card .page-card-head { display: flex; flex-direction: column; align-items: center; gap: 0.8rem; margin-bottom: 1.4rem; padding: 0; }
+        .animexa-auth-card .page-card-head img { display: block; width: 52px; height: 52px; padding: 7px; border: 1px solid rgba(22,142,245,0.14); border-radius: 50%; object-fit: contain; background: linear-gradient(145deg, #e3f6ff, #ffffff); box-shadow: 0 9px 22px rgba(22,142,245,0.13); }
+        .animexa-auth-card .page-card-head h4 { margin: 0; font-size: clamp(1.6rem, 2.2vw, 2rem); font-weight: 800; color: #071722; }
+        .animexa-auth-card .form-control { height: 3.45rem; border-radius: 16px; border: 1px solid rgba(7,23,34,0.12); box-shadow: 0 1px 0 rgba(255,255,255,0.84) inset; }
+        .animexa-auth-card .form-control:focus { border-color: rgba(37,200,242,0.85); box-shadow: 0 0 0 0.22rem rgba(37,200,242,0.14); }
+        .animexa-auth-card .email-field, .animexa-auth-card .password-field { position: relative; margin-bottom: 1rem; }
+        .animexa-auth-card .field-icon { color: rgba(7,23,34,0.48); position: absolute; top: 50%; transform: translateY(-50%); }
+        .animexa-auth-card .toggle-password { position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); font-weight: 600; color: var(--animexa-blue) !important; cursor: pointer; }
+        .animexa-auth-card .btn-primary, .animexa-auth-card .btn-login { border: 0; border-radius: 16px; background: var(--animexa-gradient); box-shadow: 0 16px 30px rgba(22,142,245,0.22); font-weight: 700; color: #ffffff; padding: 0.8rem; }
+        .animexa-auth-card .btn-primary:hover { filter: brightness(1.05); color:#fff;}
+        .animexa-login-stage { width: 100%; max-width: 460px; }
+        @media (max-width: 767.98px) {
+            .animexa-login-shell { flex-direction: column; gap: 1.25rem; padding: 1.25rem 1rem 2rem; background: linear-gradient(180deg, #d8f1ff 0%, #ecf9ff 45%, #ffffff 100%) !important; }
+            .animexa-brand-panel { width: 100%; padding: 1rem; }
+            .animexa-brand-mark { width: 200px; height: 200px; padding: 1.5rem; }
+            .animexa-login-panel { width: 100%; padding: 0; }
+        }
+    </style>
 {% endblock %}
 
+{% block page_content %}
+    <div class="animexa-login-shell">
+        <aside class="animexa-brand-panel" aria-label="{{ _('Animexa branding') }}">
+            <img class="animexa-brand-mark" src="/assets/farm_management/icons/desktop_icons/solid/animexa.svg" alt="{{ _('Animexa') }}">
+            <div class="animexa-brand-copy">
+                <h1>ANIMEXA</h1>
+                <h2>{{ _("Intelligent Farm Management") }}</h2>
+                <p class="animexa-brand-subtitle">{{ _("Smart operations. Secure access.") }}</p>
+                <p class="animexa-security-note">
+                    <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                        <path d="M7 10V8a5 5 0 0 1 10 0v2M6 10h12a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>{{ _("Protected by secure authentication") }}</span>
+                </p>
+            </div>
+        </aside>
+
+        <main class="animexa-login-panel">
+            <div class="animexa-login-stage">
+                <section class='for-login'>
+                    <div class="login-content page-card animexa-auth-card">
+                        {{ logo_section() }}
+                        <form class="form-signin form-login" role="form">
+                            {{ email_login_body() }}
+                        </form>
+                    </div>
+                </section>
+                
+                <section class='for-forgot'>
+                    <div class="login-content page-card animexa-auth-card">
+                        {{ logo_section('Forgot Password') }}
+                        <form class="form-signin form-forgot hide" role="form">
+                            <div class="page-card-body">
+                                <div class="email-field form-group">
+                                    <input type="email" id="forgot_email" class="form-control" placeholder="{{ _('Email Address') }}" required>
+                                </div>
+                            </div>
+                            <div class="page-card-actions">
+                                <button class="btn btn-sm btn-primary btn-block btn-forgot" type="submit">{{ _("Reset Password") }}</button>
+                                <p class="text-center sign-up-message mt-3"><a href="#login">{{ _("Back to Login") }}</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+{% endblock %}
 
 {% block script %}
     <script type="text/javascript">
-        {% include "templates/includes/login/login.js" %}
+        {% include "templates/includes/login/custom_login.js" %}
     </script>
 {% endblock %}
-
