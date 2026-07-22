@@ -113,14 +113,25 @@ fixtures = [
 # Includes in <head>
 # ------------------
 
-# include js, css files in header of desk.html
-app_include_css = "/assets/farm_management/css/animexa_workspace.css"
-app_include_js = "/assets/farm_management/js/farm_management.js"
+# CSS and JavaScript files included in Frappe Desk
+app_include_css = [
+    "/assets/farm_management/css/animexa_workspace.css",
+    "/assets/farm_management/css/global_loader.css",
+]
 
-# include js, css files in header of web template
-# web_include_css = "/assets/farm_management/css/farm_management.css"
-# web_include_js = "/assets/farm_management/js/farm_management.js"
+app_include_js = [
+    "/assets/farm_management/js/farm_management.js",
+    "/assets/farm_management/js/global_loader.js",
+]
 
+# CSS and JavaScript files included in website pages
+web_include_css = [
+    "/assets/farm_management/css/global_loader.css",
+]
+
+web_include_js = [
+    "/assets/farm_management/js/global_loader.js",
+]
 # include custom scss in every website theme (without file extension ".scss")
 # website_theme_scss = "farm_management/public/scss/website"
 

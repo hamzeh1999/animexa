@@ -1,0 +1,62 @@
+#freeze,
+.freeze-container,
+.frappe-spinner,
+#spinner,
+.spinner,
+.ajax-spinner,
+.progress-spinner,
+.splash,
+#splash,
+.splash-logo,
+.centered-app-logo,
+img[src*="frappe"],
+img[src*="erpnext"] {
+    display: none !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+#global-loader-overlay {
+	position: fixed;
+	inset: 0;
+	z-index: 999999;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	background: rgba(7, 23, 34, 0.65);
+	backdrop-filter: blur(8px);
+	-webkit-backdrop-filter: blur(8px);
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.6s ease, visibility 0.6s ease;}
+
+#global-loader-overlay.is-active {
+	display: flex;
+	opacity: 1;
+	pointer-events: auto;
+}
+
+#global-loader-overlay .global-loader-ring {
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+	border: 3px solid rgba(244, 247, 250, 0.18);
+	border-top-color: #25C8F2;
+	border-right-color: #168EF5;
+	border-bottom-color: #52E6B0;
+	animation: global-loader-spin 2s linear infinite;
+}
+
+@keyframes global-loader-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	#global-loader-overlay,
+	#global-loader-overlay .global-loader-ring {
+		transition: none;
+		animation: none;
+	}
+}

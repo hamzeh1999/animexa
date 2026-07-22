@@ -26,8 +26,9 @@
   {
    "fieldname": "breed_link",
    "fieldtype": "Link",
-   "label": "Breed Link",
-   "options": "API Request Log"
+   "in_list_view": 1,
+   "label": "Breed",
+   "options": "Breed"
   },
   {
    "fieldname": "male_density_rearing",
@@ -74,7 +75,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-07-19 11:17:00.253949",
+ "modified": "2026-07-20 18:06:48.771391",
  "modified_by": "Administrator",
  "module": "Master Data",
  "name": "Parent Stock Standard",

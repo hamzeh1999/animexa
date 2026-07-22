@@ -1,0 +1,133 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 1,
+ "allow_rename": 1,
+ "creation": "2026-07-21 14:05:48.276833",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "standard_information_section",
+  "flock",
+  "house",
+  "column_break_lblb",
+  "collection_date",
+  "collection_time",
+  "egg_information_section",
+  "hatching_eggs",
+  "sample_size",
+  "bulk_weight_g",
+  "column_break_nmbj",
+  "floor_eggs",
+  "reject_eggs",
+  "average_egg_weight"
+ ],
+ "fields": [
+  {
+   "fieldname": "flock",
+   "fieldtype": "Link",
+   "label": "Flock",
+   "options": "API Request Log"
+  },
+  {
+   "fieldname": "column_break_lblb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "To determine the collection  house location.",
+   "fieldname": "house",
+   "fieldtype": "Link",
+   "label": "House",
+   "options": "House"
+  },
+  {
+   "fieldname": "collection_date",
+   "fieldtype": "Date",
+   "label": "Collection Date"
+  },
+  {
+   "description": "Eggs should be collected at least four times daily,\n<br> delaying collection exposes the eggs to the heat of the incubator.",
+   "fieldname": "collection_time",
+   "fieldtype": "Time",
+   "label": "Collection Time"
+  },
+  {
+   "fieldname": "standard_information_section",
+   "fieldtype": "Section Break",
+   "label": "Standard Information"
+  },
+  {
+   "fieldname": "egg_information_section",
+   "fieldtype": "Section Break",
+   "label": "Egg Information"
+  },
+  {
+   "description": "Healthy eggs that meet specifications for transport to the hatchery.",
+   "fieldname": "hatching_eggs",
+   "fieldtype": "Int",
+   "label": "Hatching Eggs"
+  },
+  {
+   "description": "sample of 120 to 150 eggs should be taken for weighing.",
+   "fieldname": "sample_size",
+   "fieldtype": "Int",
+   "label": "Sample Size"
+  },
+  {
+   "description": "Weigh the eggs only on the  second collection of the day, to avoid weighing eggs from the previous day that may have remained in the nests.",
+   "fieldname": "bulk_weight_g",
+   "fieldtype": "Float",
+   "label": "Bulk Weight (g)",
+   "show_description_on_click": 1
+  },
+  {
+   "fieldname": "column_break_nmbj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Are a high source of bacterial infection for the hatchery<br>, collected 5-6 times daily, separately.",
+   "fieldname": "floor_eggs",
+   "fieldtype": "Int",
+   "label": "Floor Eggs"
+  },
+  {
+   "description": "Includes small, broken, misshapen, double-yolked, or<br>  eggs covered in more than 25% dirt.",
+   "fieldname": "reject_eggs",
+   "fieldtype": "Int",
+   "label": "Reject Eggs"
+  },
+  {
+   "fieldname": "average_egg_weight",
+   "fieldtype": "Float",
+   "hidden": 1,
+   "label": "Average Egg Weight",
+   "read_only": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-07-21 14:22:53.120297",
+ "modified_by": "Administrator",
+ "module": "Production Management",
+ "name": "Egg Collection",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
