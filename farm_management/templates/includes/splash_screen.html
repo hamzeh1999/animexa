@@ -1,0 +1,228 @@
+<style>
+    :root {
+        --animexa-bg: #f4f7fa; 
+        --animexa-white: #ffffff;
+        --animexa-blue: #168ef5;
+        --animexa-cyan: #25c8f2;
+        --animexa-text-main: #173042;
+        --animexa-text-muted: #64748b;
+    }
+
+    .animexa-splash-container {
+        position: fixed !important;
+        inset: 0 !important;
+        z-index: 999999 !important;
+        display: flex !important;
+        flex-direction: column;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        background: var(--animexa-bg) !important;
+        background-image: radial-gradient(circle at 50% 50%, #ffffff 0%, #edf2f7 100%) !important;
+        transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden;
+    }
+
+    .animexa-splash-container.is-hiding {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+
+    .animexa-loader-core {
+        position: relative;
+        width: 160px;
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 40px;
+    }
+
+    .animexa-glow-pulse {
+        position: absolute;
+        width: 120px;
+        height: 160px;
+        background: var(--animexa-cyan);
+        border-radius: 50%;
+        filter: blur(22px);
+        opacity: 0.3;
+        animation: animexaPulse 3s ease-in-out infinite alternate;
+    }
+
+    .animexa-digital-egg {
+        position: relative;
+        width: 100px;
+        height: 140px;
+        border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        background: var(--animexa-bg);
+        box-shadow: 
+            -12px -12px 24px #ffffff,
+            12px 12px 24px rgba(22, 142, 245, 0.15),
+            inset -4px -4px 10px rgba(22, 142, 245, 0.05),
+            inset 4px 4px 10px #ffffff;
+        overflow: hidden;
+        z-index: 2;
+        animation: animexaFloat 4s ease-in-out infinite alternate;
+    }
+
+    .animexa-egg-scanner {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 10px;
+        background: linear-gradient(to bottom, transparent, var(--animexa-blue), var(--animexa-cyan));
+        opacity: 0.8;
+        box-shadow: 0 5px 15px rgba(37, 200, 242, 0.6);
+        animation: animexaScan 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+
+    .animexa-orbit {
+        position: absolute;
+        width: 170px;
+        height: 170px;
+        border: 2px dashed rgba(22, 142, 245, 0.3);
+        border-top: 2px solid var(--animexa-blue);
+        border-radius: 50%;
+        animation: animexaSpin 3s linear infinite;
+        z-index: 1;
+    }
+
+    .animexa-loading-text {
+        text-align: center;
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        z-index: 3;
+    }
+
+    .animexa-loading-text h2 {
+        font-size: 26px;
+        font-weight: 800;
+        margin: 0 0 8px 0;
+        background: linear-gradient(90deg, var(--animexa-blue), var(--animexa-cyan));
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: 1px;
+    }
+
+    .animexa-loading-text p {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--animexa-text-muted);
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2px;
+    }
+
+    .animexa-dots span {
+        animation: animexaDots 1.4s infinite forwards;
+        font-size: 18px;
+        line-height: 1;
+    }
+    .animexa-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .animexa-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes animexaFloat {
+        0% { transform: translateY(0px); }
+        100% { transform: translateY(-12px); }
+    }
+
+    @keyframes animexaPulse {
+        0% { transform: scale(0.8); opacity: 0.2; }
+        100% { transform: scale(1.1); opacity: 0.5; }
+    }
+
+    @keyframes animexaScan {
+        0% { top: -20%; opacity: 0; }
+        20% { opacity: 1; }
+        80% { opacity: 1; }
+        100% { top: 120%; opacity: 0; }
+    }
+
+    @keyframes animexaSpin {
+        0% { transform: rotate(0deg) scaleY(0.85); } 
+        50% { transform: rotate(180deg) scaleY(0.85); }
+        100% { transform: rotate(360deg) scaleY(0.85); }
+    }
+
+    @keyframes animexaDots {
+        0%, 100% { opacity: 0; transform: translateY(0); }
+        50% { opacity: 1; transform: translateY(-2px); }
+    }
+
+    @media (max-width: 768px) {
+        .animexa-loader-core { transform: scale(0.85); margin-bottom: 20px; }
+        .animexa-loading-text h2 { font-size: 22px; }
+        .animexa-loading-text p { font-size: 13px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .animexa-glow-pulse,
+        .animexa-digital-egg,
+        .animexa-egg-scanner,
+        .animexa-orbit,
+        .animexa-dots span {
+            animation: none !important;
+        }
+    }
+</style>
+
+<div class="animexa-splash-container" id="animexa-splash">
+    <div class="animexa-loader-core">
+        <div class="animexa-glow-pulse"></div>
+        <div class="animexa-orbit"></div>
+        
+        <div class="animexa-digital-egg">
+            <div class="animexa-egg-scanner"></div>
+        </div>
+    </div>
+
+    <div class="animexa-loading-text">
+        <h2>Animexa</h2>
+        <p>جاري تهيئة المزرعة واحتضان البيانات<span class="animexa-dots"><span>.</span><span>.</span><span>.</span></span></p>
+    </div>
+</div>
+
+<script>
+    (function () {
+        if (window.__animexaSplashBooted) return;
+        window.__animexaSplashBooted = true;
+
+        function hideAnimexaSplash() {
+            const splash = document.getElementById("animexa-splash");
+            if (!splash || splash.classList.contains("is-hiding")) return;
+
+            splash.classList.add("is-hiding");
+            window.setTimeout(function () {
+                splash.remove();
+            }, 600);
+        }
+
+        window.hideAnimexaSplash = hideAnimexaSplash;
+
+        function scheduleHide() {
+            window.setTimeout(hideAnimexaSplash, 450);
+        }
+
+        if (document.readyState === "complete" || document.readyState === "interactive") {
+            scheduleHide();
+        } else {
+            document.addEventListener("DOMContentLoaded", scheduleHide, { once: true });
+            window.addEventListener("load", scheduleHide, { once: true });
+        }
+
+        if (window.frappe && typeof frappe.ready === "function") {
+            frappe.ready(scheduleHide);
+        }
+
+        document.addEventListener("login_rendered", scheduleHide, { once: true });
+
+        window.setTimeout(hideAnimexaSplash, 1600);
+    })();
+</script>
