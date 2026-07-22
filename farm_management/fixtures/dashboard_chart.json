@@ -1,0 +1,112 @@
+[
+ {
+  "aggregate_function_based_on": null,
+  "based_on": null,
+  "chart_name": "House Occupancy Status",
+  "chart_type": "Group By",
+  "color": null,
+  "currency": null,
+  "custom_options": null,
+  "docstatus": 0,
+  "doctype": "Dashboard Chart",
+  "document_type": "House",
+  "dynamic_filters_json": "[]",
+  "filters_json": "[]",
+  "from_date": null,
+  "group_by_based_on": "status",
+  "group_by_type": "Count",
+  "heatmap_year": null,
+  "is_public": 1,
+  "is_standard": 0,
+  "last_synced_on": "2026-07-22 10:04:37.574796",
+  "modified": "2026-07-21 09:17:52.957610",
+  "module": null,
+  "name": "House Occupancy Status",
+  "number_of_groups": 0,
+  "parent_document_type": null,
+  "report_name": null,
+  "roles": [
+   {
+    "role": "System Manager"
+   },
+   {
+    "role": "Farm Manager"
+   },
+   {
+    "role": "Farm Supervisor"
+   },
+   {
+    "role": "Veterinarian"
+   },
+   {
+    "role": "Production Team"
+   }
+  ],
+  "show_values_over_chart": 0,
+  "source": null,
+  "time_interval": null,
+  "timeseries": 0,
+  "timespan": null,
+  "to_date": null,
+  "type": "Donut",
+  "use_report_chart": 0,
+  "value_based_on": null,
+  "x_field": null,
+  "y_axis": []
+ },
+ {
+  "aggregate_function_based_on": null,
+  "based_on": null,
+  "chart_name": "Farm Operational Status",
+  "chart_type": "Report",
+  "color": null,
+  "currency": null,
+  "custom_options": null,
+  "docstatus": 0,
+  "doctype": "Dashboard Chart",
+  "document_type": "Farm",
+  "dynamic_filters_json": "[]",
+  "filters_json": "[]",
+  "from_date": null,
+  "group_by_based_on": null,
+  "group_by_type": null,
+  "heatmap_year": null,
+  "is_public": 1,
+  "is_standard": 0,
+  "last_synced_on": null,
+  "modified": "2026-07-22 10:01:45.733206",
+  "module": "Farm Management",
+  "name": "Farm Operational Status",
+  "number_of_groups": 0,
+  "parent_document_type": null,
+  "report_name": "Farm Operational Status",
+  "roles": [
+   {
+    "role": "System Manager"
+   },
+   {
+    "role": "Farm Manager"
+   },
+   {
+    "role": "Farm Supervisor"
+   },
+   {
+    "role": "Veterinarian"
+   },
+   {
+    "role": "Production Team"
+   }
+  ],
+  "show_values_over_chart": 0,
+  "source": null,
+  "time_interval": null,
+  "timeseries": 0,
+  "timespan": null,
+  "to_date": null,
+  "type": "Donut",
+  "use_report_chart": 1,
+  "value_based_on": null,
+  "x_field": null,
+  "y_axis": []
+ }
+]

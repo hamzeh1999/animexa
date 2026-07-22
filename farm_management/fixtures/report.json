@@ -1,0 +1,207 @@
+[
+ {
+  "add_total_row": 0,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "No",
+  "javascript": null,
+  "json": null,
+  "letter_head": null,
+  "modified": "2026-07-21 10:50:43.101696",
+  "module": "Health & Biosecurity",
+  "name": "Pending Incident Log Report",
+  "prepared_report": 0,
+  "query": "SELECT\r\n  `parent` as \"Farm:Link/Farm:150\",\r\n  `date` as \"Date:Date:100\",\r\n  `category` as \"Category:Data:150\",\r\n  `equipment` as \"Equipment:Data:130\",\r\n  `severity` as \"Severity:Data:100\",\r\n  `closed` as \"Closed:Check:80\",\r\n  `corrective_action` as \"Corrective Action:Small Text:250\"\r\nFROM `tabFarm Incident Log`\r\nWHERE `closed` = 0\r\nORDER BY `date` DESC",
+  "ref_doctype": "Farm Incident Log",
+  "reference_report": null,
+  "report_name": "Pending Incident Log Report",
+  "report_script": null,
+  "report_type": "Query Report",
+  "roles": [
+   {
+    "role": "System Manager"
+   },
+   {
+    "role": "Farm Manager"
+   },
+   {
+    "role": "Farm Supervisor"
+   },
+   {
+    "role": "Veterinarian"
+   },
+   {
+    "role": "Production Team"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 0,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "No",
+  "javascript": null,
+  "json": null,
+  "letter_head": null,
+  "modified": "2026-07-21 11:09:14.844416",
+  "module": "Health & Biosecurity",
+  "name": "Incident Log Report",
+  "prepared_report": 0,
+  "query": "SELECT\r\n  `parent` as \"Farm:Link/Farm:150\",\r\n  `date` as \"Date:Date:100\",\r\n  `category` as \"Category:Data:150\",\r\n  `equipment` as \"Equipment:Data:130\",\r\n  `severity` as \"Severity:Data:100\",\r\n  `closed` as \"Closed:Check:80\",\r\n  `corrective_action` as \"Corrective Action:Small Text:250\"\r\nFROM `tabFarm Incident Log`\r\nORDER BY `date` DESC",
+  "ref_doctype": "Farm Incident Log",
+  "reference_report": null,
+  "report_name": "Incident Log Report",
+  "report_script": null,
+  "report_type": "Query Report",
+  "roles": [
+   {
+    "role": "System Manager"
+   },
+   {
+    "role": "Farm Manager"
+   },
+   {
+    "role": "Farm Supervisor"
+   },
+   {
+    "role": "Veterinarian"
+   },
+   {
+    "role": "Production Team"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 0,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "No",
+  "javascript": null,
+  "json": null,
+  "letter_head": null,
+  "modified": "2026-07-21 09:17:53.089755",
+  "module": "Health & Biosecurity",
+  "name": "Vaccination Record Report",
+  "prepared_report": 0,
+  "query": "SELECT\n  `parent` as \"Farm:Link/Farm:150\",\n  `vaccination_date` as \"Vaccination Date:Date:120\",\n  `vaccine` as \"Vaccine:Data:150\",\n  `batch_number` as \"Batch Number:Data:120\",\n  `manufacturer` as \"Manufacturer:Data:150\",\n  `administrator` as \"Administered By:Data:150\"\nFROM `tabFarm Vaccination Record`\nORDER BY `vaccination_date` DESC",
+  "ref_doctype": "Farm Vaccination Record",
+  "reference_report": null,
+  "report_name": "Vaccination Record Report",
+  "report_script": null,
+  "report_type": "Query Report",
+  "roles": [
+   {
+    "role": "System Manager"
+   },
+   {
+    "role": "Farm Manager"
+   },
+   {
+    "role": "Farm Supervisor"
+   },
+   {
+    "role": "Veterinarian"
+   },
+   {
+    "role": "Production Team"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 0,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "No",
+  "javascript": null,
+  "json": null,
+  "letter_head": null,
+  "modified": "2026-07-21 09:17:53.103257",
+  "module": "Health & Biosecurity",
+  "name": "Water Quality Test Report",
+  "prepared_report": 0,
+  "query": "SELECT\n  `parent` as \"Farm:Link/Farm:150\",\n  `sample_date` as \"Sample Date:Date:120\",\n  `laboratory` as \"Laboratory:Data:150\",\n  `tvc` as \"TVC:Float:100\",\n  `ph` as \"pH:Float:80\",\n  `pass_fail` as \"Result:Data:100\"\nFROM `tabFarm Water Quality Test`\nORDER BY `sample_date` DESC",
+  "ref_doctype": "Farm Water Quality Test",
+  "reference_report": null,
+  "report_name": "Water Quality Test Report",
+  "report_script": null,
+  "report_type": "Query Report",
+  "roles": [
+   {
+    "role": "System Manager"
+   },
+   {
+    "role": "Farm Manager"
+   },
+   {
+    "role": "Farm Supervisor"
+   },
+   {
+    "role": "Veterinarian"
+   },
+   {
+    "role": "Production Team"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 0,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "No",
+  "javascript": null,
+  "json": null,
+  "letter_head": null,
+  "modified": "2026-07-21 09:17:53.116204",
+  "module": "Health & Biosecurity",
+  "name": "Visitor Log Report",
+  "prepared_report": 0,
+  "query": "SELECT\n  `parent` as \"Farm:Link/Farm:150\",\n  `entry_time` as \"Entry Time:Datetime:150\",\n  `visitor_name` as \"Visitor:Data:150\",\n  `company` as \"Company:Data:150\",\n  `purpose` as \"Purpose:Data:180\",\n  `last_contact_with_poultry` as \"Last Poultry Contact:Date:160\"\nFROM `tabFarm Visitor Log`\nORDER BY `entry_time` DESC",
+  "ref_doctype": "Farm Visitor Log",
+  "reference_report": null,
+  "report_name": "Visitor Log Report",
+  "report_script": null,
+  "report_type": "Query Report",
+  "roles": [
+   {
+    "role": "System Manager"
+   },
+   {
+    "role": "Farm Manager"
+   },
+   {
+    "role": "Farm Supervisor"
+   },
+   {
+    "role": "Veterinarian"
+   },
+   {
+    "role": "Production Team"
+   }
+  ],
+  "timeout": 0
+ }
+]
