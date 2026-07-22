@@ -9,6 +9,8 @@
   "main_section",
   "farm_name",
   "ownership_type",
+  "farm_type",
+  "breeder_level",
   "farm_purpose",
   "latitude",
   "longitude",
@@ -19,6 +21,7 @@
   "infrastructure_section",
   "water_source",
   "total_houses",
+  "view_houses",
   "total_capacity",
   "has_backup_generator",
   "column_break_sqjq",
@@ -31,9 +34,9 @@
   "dead_bird_disposal_method",
   "cleaning_start_date",
   "cleaning_end_date",
+  "ready_date",
   "downtime_days",
   "column_break_hqel",
-  "ready_date",
   "tvc_result",
   "salmonella_result",
   "rodent_control_active",
@@ -61,12 +64,31 @@
    "options": "Own\nContracted\nManaged"
   },
   {
+   "description": "Primary classification of the farm operation.",
+   "fieldname": "farm_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Farm Type",
+   "options": "Breeder\nBroiler\nLayer\nHatchery",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.farm_type==\"Breeder\"",
+   "description": "Defines the breeder production level.",
+   "fieldname": "breeder_level",
+   "fieldtype": "Select",
+   "label": "Breeder Level",
+   "options": "Grandparent Stock\nParent Stock"
+  },
+  {
+   "description": "Automatically calculated from the status of this Farm's Houses.",
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Status",
    "options": "\nReady\nOccupied\nCleaning\nEmpty\nInactive",
-   "reqd": 1
+   "read_only": 1
   },
   {
    "default": "0",
@@ -80,7 +102,7 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Farm Purpose",
-   "options": "Rearing\nLaying\nDay-Old-to-Depletion"
+   "options": "Rearing\nLaying\nDay-Old-to-Depletion\nHatching"
   },
   {
    "fieldname": "location",
@@ -90,6 +112,7 @@
   },
   {
    "default": "0",
+   "description": "Number of Houses linked to this Farm - a count, not a record. Use View Houses to open them.",
    "fieldname": "total_houses",
    "fieldtype": "Int",
    "in_list_view": 1,
@@ -97,6 +120,12 @@
    "no_copy": 1,
    "non_negative": 1,
    "read_only": 1
+  },
+  {
+   "depends_on": "eval:!doc.__islocal",
+   "fieldname": "view_houses",
+   "fieldtype": "Button",
+   "label": "View Houses"
   },
   {
    "default": "0",
@@ -179,12 +208,13 @@
    "label": "Biosecurity & Hygiene"
   },
   {
-   "default": "21",
-   "description": "Number of days between Cleaning Start and Ready Date.",
+   "default": "0",
+   "description": "Number of downtime days between Cleaning End Date and Ready Date before the farm becomes ready for new placement.",
    "fieldname": "downtime_days",
    "fieldtype": "Int",
    "label": "Downtime Days",
-   "non_negative": 1
+   "non_negative": 1,
+   "read_only": 1
   },
   {
    "fieldname": "column_break_fasd",
@@ -289,7 +319,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-07-19 11:36:25.237670",
+ "modified": "2026-07-22 13:29:04.925764",
  "modified_by": "Administrator",
  "module": "Farm Management",
  "name": "Farm",
