@@ -27,6 +27,14 @@ frappe.ui.form.on("Farm", {
 });
 
 function update_farm_purpose_options(frm, { keep_value }) {
+	// refresh() re-runs this on every reload/save/focus-regain even though
+	// farm_type hasn't changed - skip the redundant set_df_property/refresh_field
+	// work when we've already computed the options for this same Farm Type.
+	if (frm.__farm_purpose_options_type === frm.doc.farm_type) {
+		return;
+	}
+	frm.__farm_purpose_options_type = frm.doc.farm_type;
+
 	const valid_purposes = frm.doc.farm_type
 		? FARM_PURPOSE_OPTIONS_BY_FARM_TYPE[frm.doc.farm_type] || []
 		: ALL_FARM_PURPOSE_OPTIONS;

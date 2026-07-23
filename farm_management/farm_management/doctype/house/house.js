@@ -23,12 +23,21 @@ frappe.ui.form.on("House", {
 });
 
 function apply_housing_model_filter(frm, { keep_value }) {
+	// refresh() re-runs this on every reload/save/focus-regain even though the
+	// Farm hasn't changed - skip the round trip to the server when we've
+	// already computed the options for this same Farm.
+	if (frm.__housing_model_options_farm === frm.doc.farm) {
+		return;
+	}
+
 	if (!frm.doc.farm) {
+		frm.__housing_model_options_farm = frm.doc.farm;
 		set_housing_model_options(frm, ALL_HOUSING_MODEL_OPTIONS, keep_value);
 		return;
 	}
 
 	frappe.db.get_value("Farm", frm.doc.farm, "farm_type").then(({ message }) => {
+		frm.__housing_model_options_farm = frm.doc.farm;
 		const farm_type = message && message.farm_type;
 		const valid_models = farm_type
 			? HOUSING_MODEL_OPTIONS_BY_FARM_TYPE[farm_type] || []
